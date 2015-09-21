@@ -1,0 +1,178 @@
+@import url(https://fonts.googleapis.com/css?family=Asap:400,700&subset=latin,latin-ext);
+
+*, html, body {
+  font-family: 'Asap', sans-serif;
+  color: #333;
+  font-size: 16px;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  -webkit-box-sizing: inherit;
+  -moz-box-sizing: inherit;
+  box-sizing: inherit;
+}
+
+body {
+  background: url('../img/bg.png');
+}
+
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  color: #000;
+}
+
+.header {
+  position: relative;
+  background: url('../img/header-bg.jpg') center top no-repeat;
+  background-size: 100%;
+  height: 300px;
+  border-bottom: 4px solid #FBB03B;
+  box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.1);;
+  z-index: 10;
+}
+
+.header > .content {
+  padding-top: 30px;
+}
+
+section.main {
+  background: #fff;
+  padding: 10px;
+}
+
+.content {
+  margin: 0 auto;
+  width: 1000px;
+}
+
+.main {
+  position: relative;
+}
+
+.logo {
+  background: url('../img/logo.png') center no-repeat;
+  height: 180px;
+  width: 160px;
+  float: left;
+  text-indent: -9999px;
+}
+
+.tagline {
+  float: left;
+  font-size: 88px;
+  font-weight: bold;
+  text-shadow: 0px 0px 6px #333;
+  color: #FBB03B;
+  margin-top: 50px;
+  margin-left: 20px;
+}
+
+.tagline small {
+  color: #FBB03B;
+  font-size: 28px;
+}
+
+/* NAVIGATION */
+
+.header .navigation {
+  position: absolute;
+  bottom: 0;
+}
+
+nav {
+  display: block;
+  width: 100%;
+  background: rgba(255,255,255,0.8);
+  padding: 10px;
+}
+
+nav ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+nav ul li {
+  display: block;
+  float: left;
+}
+
+nav ul li.admin-login {
+  float: right;
+}
+
+nav ul li a {
+  display: block;
+  padding: 5px 10px;
+  color: #333;
+  border-radius: 3px;
+}
+
+nav ul li a:hover {
+  background: #fff;
+  box-shadow: 0px 0px 3px #ccc;
+}
+
+/* end of NAVIGATION */
+
+/* DESTINATIONS */
+
+.destinations .destination {
+  float: left;
+  padding: 10px;
+  background: #f7f7f7;
+  border-radius: 5px;
+  margin: 10px;
+  width: 220px;
+}
+
+.destinations .destination h1 {
+  text-align: center;
+}
+
+.destinations .destination .see-more {
+  display: block;
+  font-size: 14px;
+  text-decoration: underline;
+  color: rgb(25, 132, 158);
+  text-align: right;
+}
+
+.destinations .destination .see-more:hover {
+  color: #FBB03B;
+}
+
+.destinations .destination .destination-image img {
+  border-radius: 5px;
+}
+
+/* end of DESTINATIONS */
+
+/* CLEARFIX */
+
+.clearfix:after {
+     visibility: hidden;
+     display: block;
+     font-size: 0;
+     content: " ";
+     clear: both;
+     height: 0;
+     }
+.clearfix { display: inline-block; }
+/* start commented backslash hack \*/
+* html .clearfix { height: 1%; }
+.clearfix { display: block; }
+/* close commented backslash hack */
+
+/* end of CLEARFIX */
