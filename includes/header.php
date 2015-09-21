@@ -16,9 +16,6 @@
           <a href="/tourizm/index.php">Početna</a>
         </li>
         <li>
-          <a href="/tourizm/offers.php">Ponude</a>
-        </li>
-        <li>
           <a href="/tourizm/contact.php">Kontakt</a>
         </li>
         <?php

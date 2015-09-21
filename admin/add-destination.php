@@ -77,12 +77,12 @@
     <?php include('../includes/header.php') ?>
     <section class="main content">
       <h1>Add new destination</h1>
-      <ul class="admin-submenu">
+      <ul class="admin-submenu clearfix">
         <li>
           <a href="manage-destinations.php">Destinations list</a>
         </li>
       </ul>
-      <p>
+      <p class="notice">
         <?php echo $msg_to_user; ?>
       </p>
       <form action="add-destination.php" method="post" enctype="multipart/form-data">

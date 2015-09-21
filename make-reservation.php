@@ -60,7 +60,7 @@
     <section class="main content">
       <?php if ($destination) : ?>
       <h1>Rezerviši <?php echo $destination->name; ?></h1>
-      <p>
+      <p class="notice">
         <?php echo $msg_to_user; ?>
       </p>
       <form action="make-reservation.php" method="post">

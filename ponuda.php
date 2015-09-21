@@ -19,7 +19,7 @@
   <body>
     <?php include('includes/header.php') ?>
     <section class="main content">
-      <div class="destination">
+      <div class="single-destination clearfix">
         <?php if ($destination) : ?>
           <h1><?php echo $destination->name; ?></h1>
           <p>

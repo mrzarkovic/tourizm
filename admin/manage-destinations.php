@@ -17,12 +17,13 @@
     <meta charset="utf-8">
     <title>Tourizm | Manage Destinations</title>
     <link rel="stylesheet" type="text/css" href="../css/style.css" />
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
   </head>
   <body>
     <?php include('../includes/header.php') ?>
     <section class="main content">
       <h1>Destinations list</h1>
-      <ul class="admin-submenu">
+      <ul class="admin-submenu clearfix">
         <li>
           <a href="add-destination.php">Add Destination</a>
         </li>
@@ -35,13 +36,13 @@
          { ?>
           <div class="destination">
             <h1><?php echo $destination->name; ?></h1>
-            <p><?php echo $destination->description; ?></p>
+            <p><?php echo getExcerpt($destination->description); ?></p>
             <div class="destination-price">
               <?php echo $destination->price; ?>
             </div>
             <div class="control">
               <a href="edit-destination.php?id=<?php echo $destination->id; ?>">Izmeni</a>
-              <a href="delete-destination.php?id=<?php echo $destination->id; ?>">Obriši</a>
+              <a href="delete-destination.php?id=<?php echo $destination->id; ?>" class="del">Obriši</a>
             </div>
           </div>
           <!-- end of .destination -->
@@ -60,6 +61,15 @@
       </div>
     </section>
     <?php include('../includes/footer.php') ?>
+    <script>
+    $(document).ready(function(){
+     $(".del").click(function(){
+       if (!confirm("Da li ste sigurni da želite da obrišete destinaciju?")){
+         return false;
+       }
+     });
+   });
+    </script>
   </body>
 </html>
 <?php

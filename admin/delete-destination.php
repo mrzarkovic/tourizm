@@ -41,7 +41,7 @@ else
       <?php include('../includes/header.php') ?>
       <section class="main content">
         <h1>Delete a destination</h1>
-        <ul class="admin-submenu">
+        <ul class="admin-submenu clearfix">
           <li>
             <a href="manage-destinations.php">Destinations list</a>
           </li>
@@ -49,7 +49,7 @@ else
             <a href="add-destination.php">Add Destination</a>
           </li>
         </ul>
-        <p>
+        <p class="notice">
           <?php echo $msg_to_user; ?>
         </p>
       </section>

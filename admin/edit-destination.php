@@ -1,0 +1,134 @@
+<?php
+  include('../includes/helpers.php');
+
+  if (!user_logged_in())
+  {
+    header('Location: ../login.php');
+  }
+  else
+  {
+
+    $msg_to_user = "";
+    $id = 0;
+
+    if (!empty($_GET) && isset($_GET['id']))
+    {
+     $id = $_GET['id'];
+    }
+    else if (!empty($_POST))
+    {
+      $destination_id = $_POST['destination_id'];
+      // Check input
+      if ( ($_POST['name'] == '') || ($_POST['description'] == '') || ($_POST['total_quota'] == ''))
+      {
+        $msg_to_user = "Morate popuniti sva polja.";
+      }
+      else
+      {
+        $conn = connect_to_db();
+
+        $image_path = $_POST['image_path'];
+
+        // Prevent SQL Injection
+        $name = $conn->real_escape_string($_POST['name']);
+        $description = $conn->real_escape_string($_POST['description']);
+        $total_quota = $conn->real_escape_string($_POST['total_quota']);
+
+        if ($_FILES["image"]["name"])
+        {
+           $target_dir = "../img/destinations/";
+          $target_file = $target_dir . basename($_FILES["image"]["name"]);
+          $upload_ok = 1;
+          $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
+
+          $image_path = basename($_FILES["image"]["name"]);
+
+          // Check if file is image
+          $check = getimagesize($_FILES["image"]["tmp_name"]);
+          if( $check !== false )
+          {
+            if (!move_uploaded_file($_FILES["image"]["tmp_name"], $target_file))
+            {
+              $msg_to_user = "Greska prilikom uploadovanja";
+            }
+          }
+          else
+          {
+              $msg_to_user = "Pogresan fajl.";
+          }
+        }
+
+        $sql = "UPDATE destinations SET name = '$name', description = '$description', total_quota = '$total_quota', image_path = '$image_path' WHERE id = '$destination_id'";
+
+       $result = $conn->query($sql);
+
+       if ($error = $conn->error)
+       {
+         $msg_to_user = "Došlo je do greske pri čuvanju. " . $error;
+       }
+       else
+       {
+         $msg_to_user = "Uspešno ste izmenili destinaciju: " . $name;
+       }
+
+
+        $conn->close();
+      }
+
+      $id = $destination_id;
+    }
+
+    $destination = get_destination( $id );
+?>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Tourizm | Edit Destination: <?php echo $destination->name; ?></title>
+    <link rel="stylesheet" type="text/css" href="../css/style.css" />
+  </head>
+  <body>
+    <?php include('../includes/header.php') ?>
+    <section class="main content">
+      <h1>Edit destination: <?php echo $destination->name; ?></h1>
+      <ul class="admin-submenu clearfix">
+        <li>
+          <a href="manage-destinations.php">Destinations list</a>
+        </li>
+        <li>
+          <a href="add-destination.php">Add Destination</a>
+        </li>
+      </ul>
+      <p class="notice">
+        <?php echo $msg_to_user; ?>
+      </p>
+      <form action="edit-destination.php" method="post" enctype="multipart/form-data">
+         <input type="hidden" name="destination_id" value="<?php echo $destination->id; ?>">
+         <input type="hidden" name="image_path" value="<?php echo $destination->image_path; ?>"/>
+        <div class="form-field">
+          <label for="name">Naslov:</label>
+          <input type="text" name="name" id="name" value="<?php echo $destination->name; ?>" />
+        </div>
+        <div class="form-field">
+          <label for="description">Opis:</label>
+          <textarea name="description" id="description"><?php echo $destination->description; ?></textarea>
+        </div>
+        <div class="form-field">
+          <label for="image">Fotografija:</label>
+          <input type="file" name="image" id="image">
+        </div>
+        <div class="form-field">
+          <label for="total_quota">Ukupno aranžmana:</label>
+          <input type="text" name="total_quota" id="total_quota" value="<?php echo $destination->total_quota; ?>"/>
+        </div>
+        <div class="form-field">
+          <input type="submit" name="submit" value="Izmeni destianciju" />
+        </div>
+      </form>
+    </section>
+    <?php include('../includes/footer.php') ?>
+  </body>
+</html>
+<?php
+  }
+?>

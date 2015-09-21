@@ -74,7 +74,7 @@ else
     <?php include('includes/header.php') ?>
     <section class="main content">
       <h1>Please Login</h1>
-      <p>
+      <p class="notice">
         <?php echo $msg_to_user; ?>
       </p>
       <form action="login.php" method="post">

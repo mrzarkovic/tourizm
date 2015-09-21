@@ -28,3 +28,6 @@ INSERT INTO `tourizm`.`users` (`username`, `password`) VALUES ('admin', '1a1dc91
 
 ALTER TABLE `tourizm`.`destinations`
 ADD COLUMN `image_path` VARCHAR(255) NULL AFTER `date_to`;
+
+ALTER TABLE `tourizm`.`reservations`
+CHANGE COLUMN `cutomer_name` `customer_name` VARCHAR(255) NULL DEFAULT NULL ;

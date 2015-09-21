@@ -19,6 +19,7 @@
         <?php
         if ($destinations)
         {
+           $i = 0;
          foreach ($destinations as $destination)
          {
            ?>
@@ -27,7 +28,7 @@
                 <img src="img/destinations/<?php echo $destination->image_path; ?>" width="200"/>
               </div>
               <h1><?php echo $destination->name; ?></h1>
-              <p><?php echo $destination->description; ?></p>
+              <p><?php echo getExcerpt($destination->description); ?></p>
               <div class="destination-price">
                 <?php echo $destination->price; ?>
               </div>
@@ -35,6 +36,9 @@
             </div>
             <!-- end of .destination -->
           <?php
+            $i++;
+            if ($i%4 == 0)
+               echo '<div class="clearfix"></div>';
           }
         }
         else
