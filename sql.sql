@@ -31,3 +31,6 @@ ADD COLUMN `image_path` VARCHAR(255) NULL AFTER `date_to`;
 
 ALTER TABLE `tourizm`.`reservations`
 CHANGE COLUMN `cutomer_name` `customer_name` VARCHAR(255) NULL DEFAULT NULL ;
+
+ALTER TABLE `tourizm`.`reservations`
+ADD COLUMN `customer_phone` VARCHAR(255) NULL AFTER `customer_email`;

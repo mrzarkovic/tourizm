@@ -40,13 +40,13 @@ else
     <body>
       <?php include('../includes/header.php') ?>
       <section class="main content">
-        <h1>Delete a destination</h1>
+        <h1>Obriši destinaciju</h1>
         <ul class="admin-submenu clearfix">
           <li>
-            <a href="manage-destinations.php">Destinations list</a>
+            <a href="manage-destinations.php">Lista destinacija</a>
           </li>
           <li>
-            <a href="add-destination.php">Add Destination</a>
+            <a href="add-destination.php">Dodaj destinaciju</a>
           </li>
         </ul>
         <p class="notice">

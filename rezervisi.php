@@ -15,7 +15,7 @@
     $destination_name = $_POST['destination_name'];
 
     // Check input
-    if ( ($_POST['customer_name'] == '') || ($_POST['customer_email'] == ''))
+    if ( ($_POST['customer_name'] == '') || ($_POST['customer_email'] == '') || ($_POST['customer_phone'] == ''))
     {
       $msg_to_user = "Morate popuniti sva polja.";
     }
@@ -26,8 +26,9 @@
       // Prevent SQL Injection
       $customer_name = $conn->real_escape_string($_POST['customer_name']);
       $customer_email = $conn->real_escape_string($_POST['customer_email']);
+      $customer_phone = $conn->real_escape_string($_POST['customer_phone']);
 
-      $sql = "INSERT INTO reservations (destination_id, customer_name, customer_email) VALUES ('$destination_id', '$customer_name', '$customer_email')";
+      $sql = "INSERT INTO reservations (destination_id, customer_name, customer_email, customer_phone) VALUES ('$destination_id', '$customer_name', '$customer_email', '$customer_phone')";
 
       $result = $conn->query($sql);
 
@@ -60,15 +61,22 @@
     <section class="main content">
       <?php if ($destination) : ?>
       <h1>Rezerviši <?php echo $destination->name; ?></h1>
+      <div class="date">
+         <time><?php echo get_pretty_date($destination->date_from); ?></time> - <time><?php echo get_pretty_date($destination->date_to); ?></time>
+      </div>
       <p class="notice">
         <?php echo $msg_to_user; ?>
       </p>
-      <form action="make-reservation.php" method="post">
+      <form action="rezervisi.php" method="post">
         <input type="hidden" name="destination_id" value="<?php echo $destination->id; ?>">
         <input type="hidden" name="destination_name" value="<?php echo $destination->name; ?>"/>
         <div class="form-field">
           <label for="name">Vaše ime:</label>
           <input type="text" name="customer_name" id="name" value="" />
+        </div>
+        <div class="form-field">
+          <label for="phone">Vaš telefon:</label>
+          <input type="text" name="customer_phone" id="phone" value="" />
         </div>
         <div class="form-field">
           <label for="email">Vaš email:</label>

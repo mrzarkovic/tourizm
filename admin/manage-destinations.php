@@ -22,10 +22,10 @@
   <body>
     <?php include('../includes/header.php') ?>
     <section class="main content">
-      <h1>Destinations list</h1>
+      <h1>Lista destinacija</h1>
       <ul class="admin-submenu clearfix">
         <li>
-          <a href="add-destination.php">Add Destination</a>
+          <a href="add-destination.php">Dodaj destinaciju</a>
         </li>
       </ul>
       <div class="admin-destinations">
@@ -35,10 +35,10 @@
          foreach ($destinations as $destination)
          { ?>
           <div class="destination">
-            <h1><?php echo $destination->name; ?></h1>
+            <h1><?php echo $destination->name; ?> <small>(<time><?php echo get_pretty_date($destination->date_from); ?></time> - <time><?php echo get_pretty_date($destination->date_to); ?></time>)</small></h1>
             <p><?php echo getExcerpt($destination->description); ?></p>
             <div class="destination-price">
-              <?php echo $destination->price; ?>
+              <?php echo $destination->price; ?> RSD
             </div>
             <div class="control">
               <a href="edit-destination.php?id=<?php echo $destination->id; ?>">Izmeni</a>

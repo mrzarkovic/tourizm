@@ -50,18 +50,6 @@ if (!empty($_POST))
     $conn->close();
   }
 }
-/*
-var_dump(user_logged_in());
-
-if ( $user = user_logged_in() )
-{
-  echo "Ulogovan " . $user;
-}
-else
-{
-  echo "Nije ulogovan";
-}
-*/
 ?>
 <!DOCTYPE html>
 <html>
@@ -73,21 +61,21 @@ else
   <body>
     <?php include('includes/header.php') ?>
     <section class="main content">
-      <h1>Please Login</h1>
+      <h1>Prijava na sistem</h1>
       <p class="notice">
         <?php echo $msg_to_user; ?>
       </p>
       <form action="login.php" method="post">
         <div class="form-field">
-          <label for="username">Username</label>
+          <label for="username">Korisničko ime</label>
           <input type="text" name="username" id="username" />
         </div>
         <div class="form-field">
-          <label for="password">Password</label>
+          <label for="password">Lozinka</label>
           <input type="password" name="password" id="password" />
         </div>
         <div class="form-field">
-          <input type="submit" name="submit" value="Login" />
+          <input type="submit" name="submit" value="Prijavi se" />
         </div>
       </form>
     </section>

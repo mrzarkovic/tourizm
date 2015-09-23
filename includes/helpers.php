@@ -30,11 +30,40 @@ function user_logged_in()
 
 /* DESTINATIONS */
 
-function get_destinations()
+function find_destinations($keyword = "")
+{
+   $conn = connect_to_db();
+   $sql = "SELECT * FROM destinations WHERE name LIKE '%$keyword%' OR description LIKE '%$keyword%' ORDER BY id DESC";
+   $result = $conn->query($sql);
+
+   $destinations = array();
+
+   if ($result->num_rows > 0)
+   {
+     while($destination = $result->fetch_object())
+     {
+       $destinations[] = $destination;
+     }
+     return $destinations;
+   }
+   else
+   {
+     return false;
+   }
+}
+
+function get_destinations($limit = 0, $start = 0)
 {
   $conn = connect_to_db();
 
-  $sql = "SELECT * FROM destinations";
+  if ( $limit != 0 )
+  {
+     $sql = "SELECT * FROM destinations ORDER BY id DESC LIMIT $start, $limit";
+  }
+  else
+  {
+     $sql = "SELECT * FROM destinations ORDER BY id DESC";
+  }
 
   $result = $conn->query($sql);
 
@@ -73,6 +102,12 @@ function get_destination($id = 0)
   {
     return false;
   }
+}
+
+function get_pretty_date($date = "0000-00-00")
+{
+   $pretty_date = new DateTime($date);
+   return $pretty_date = $pretty_date->format('m.d.Y.');
 }
 
 /* end of DESTINATIONS */

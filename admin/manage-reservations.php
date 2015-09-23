@@ -20,25 +20,25 @@
   <body>
     <?php include('../includes/header.php') ?>
     <section class="main content">
-      <h1>Reservations list</h1>
+      <h1>Sve rezervacije</h1>
       <div class="reservations">
         <?php
         if ($reservations)
         {
         ?>
-        <ul>
+        <ol>
         <?php
         foreach ($reservations as $reservation)
         {
           $destination = get_destination($reservation->destination_id);
         ?>
           <li>
-            <b><?php echo $destination->name; ?></b> <?php echo $reservation->customer_name; ?> (<a href="mailto:<?php echo $reservation->customer_email; ?>"><?php echo $reservation->customer_email; ?></a>)
+            <b><?php echo $destination->name; ?></b> <?php echo $reservation->customer_name; ?> (<?php echo $reservation->customer_phone; ?>, <a href="mailto:<?php echo $reservation->customer_email; ?>"><?php echo $reservation->customer_email; ?></a>)
           </li>
         <?php
         }
         ?>
-        </ul>
+        </ol>
         <?php
         }
         else

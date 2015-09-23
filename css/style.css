@@ -130,6 +130,18 @@ nav ul li a:hover {
 
 /* end of NAVIGATION */
 
+/* MAIN */
+
+.main .about h1 {
+   margin: 10px 0;
+}
+
+.main .about p {
+   padding: 10px;
+}
+
+/* end of MAIN */
+
 /* DESTINATIONS */
 
 .destinations .destination {
@@ -153,6 +165,23 @@ nav ul li a:hover {
   color: rgb(25, 132, 158);
   text-align: right;
   margin-top: 5px;
+}
+
+.admin-destinations .destination .destination-price,
+.single-destination .destination-price,
+.destinations .destination .destination-price {
+   color: rgb(189, 52, 52);
+   font-weight: bold;
+   font-size: 13px;
+}
+
+.single-destination .destination-price {
+   font-size: 16px;
+   margin: 5px 0;
+}
+
+.destinations .destination .destination-price {
+   text-align: right;
 }
 
 .destinations .destination .see-more:hover {
@@ -188,6 +217,29 @@ input[type="submit"] {
    padding: 5px 10px;
    border-radius: 3px;
    background: rgb(25, 132, 158);
+}
+
+.date {
+   margin-bottom: 10px;
+   font-style: italic;
+}
+
+.destination .date {
+   text-align: center;
+   color: #888;
+}
+
+.date time {
+   font-size: 14px;
+   color: #888;
+}
+
+.search input {
+   vertical-align: middle;
+}
+
+.search input[type="text"] {
+   padding: 3px 5px;
 }
 
 /* end of DESTINATIONS */
@@ -230,13 +282,23 @@ input[type="submit"] {
 }
 
 .admin-submenu li a {
-   display: block;
-   text-decoration: underline;
-   padding: 0px 10px;
+   display: inline-block;
+   border: 0;
+   margin: 0 5px;
+   font-size: 14px;
+   color: #fff;
+   padding: 5px 10px;
+   border-radius: 3px;
+   background: rgb(25, 132, 158);
 }
 
 .admin-destinations .destination {
    margin: 10px 0;
+}
+
+.admin-destinations .destination h1 * {
+   color: #666;
+   font-weight: normal;
 }
 
 .admin-destinations .destination a {
@@ -247,14 +309,15 @@ input[type="submit"] {
    color: rgb(25, 132, 158);
 }
 
-.reservations ul {
-   list-style-type: none;
+.reservations ol {
    margin: 10px 0;
-   padding: 0;
+   padding: 0 0 0 20px;
 }
 
-.reservations ul li a {
+.reservations ol li a {
+   display: inline-block;
    font-size: 14px;
+   padding: 5px 0;
    text-decoration: underline;
    color: rgb(25, 132, 158);
 }
@@ -270,10 +333,39 @@ input[type="submit"] {
 
 /* end of FOOTER */
 
+/* PAGINATION */
+
+.pagination {
+   text-align: center;
+}
+
+.pagination ul {
+   display: inline-block;
+   list-style-type: none;
+   margin: 10px 0;
+   padding: 0;
+}
+
+.pagination ul li {
+   float: left;
+}
+
+.pagination ul li a {
+   display: inline-block;
+   padding: 5px 10px;
+}
+
+/* end of PAGINATION */
+
 .notice {
+   margin: 5px 0;
    font-style: italic;
    color: rgb(25, 132, 158);
    font-size: 18px;
+}
+
+.contact-map {
+   float: right;
 }
 
 /* CLEARFIX */

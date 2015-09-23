@@ -2,7 +2,29 @@
   include_once('includes/helpers.php');
 
   $msg_to_user = "";
-  $destinations = get_destinations( $limit = 4 );
+
+  $per_page = 4;
+
+  if (!empty($_GET['page']))
+  {
+     $page = (int) $_GET['page'] - 1;
+  }
+  else
+  {
+     $page = 0;
+  }
+
+  $start = $per_page * $page;
+  $destinations = get_destinations($per_page, $start);
+
+  $destinations_count = count(get_destinations());
+  $max_page = ceil($destinations_count / $per_page);
+
+  if (!empty($_POST['search']))
+  {
+      $keyword = $_POST['search'];
+      $destinations = find_destinations($keyword);
+  }
 
 ?>
 <!DOCTYPE html>
@@ -15,11 +37,19 @@
   <body>
     <?php include('includes/header.php') ?>
     <section class="main content">
-      <h1>Najnovije destinacije i aranžmani</h1>
+      <h1>Sve ponude</h1>
       <div class="destinations clearfix">
+         <div class="search">
+            <form action="ponude.php" method="post">
+               <label for="search">Pretraga: </label>
+               <input type="text" name="search" placeholder="npr. Jamajka">
+               <input type="submit" name="submit" value="Traži">
+            </form>
+         </div>
         <?php
         if ($destinations)
         {
+           $i = 0;
          foreach ($destinations as $destination)
          {
            ?>
@@ -39,6 +69,9 @@
             </div>
             <!-- end of .destination -->
           <?php
+            $i++;
+            if ($i%4 == 0)
+               echo '<div class="clearfix"></div>';
           }
         }
         else
@@ -51,12 +84,22 @@
         }
         ?>
       </div>
-      <section class="about">
-         <h1>O agenciji Tourizm</h1>
-         <p>Sed vel sapien fermentum, tincidunt tortor at, sagittis nunc. Etiam eu pharetra sapien. Fusce pretium orci neque, consequat fringilla sapien posuere a. Aenean ornare sapien vitae odio sollicitudin convallis.</p>
-         <p>Donec viverra nisl sed consequat feugiat. Proin ornare justo a metus finibus, quis commodo mauris scelerisque. Ut magna nunc, elementum nec augue nec, sodales semper tortor. Vestibulum ullamcorper, sapien quis pulvinar mattis, erat odio congue lacus, vel pharetra velit est vel nulla.</p>
-         <p>Cras varius ligula arcu, non suscipit tortor dapibus sed. Nulla vel molestie turpis. Quisque quis eleifend sem. Ut at imperdiet sapien, eu malesuada massa. Vestibulum nec commodo libero, gravida vestibulum nulla.</p>
-      </section>
+      <?php if(empty($_POST['search'])) : ?>
+      <div class="pagination">
+         <ul class="clearfix">
+            <?php if ($page > 0 ) : ?>
+            <li>
+               <a href="?page=<?php echo $page; ?>">« Prethodna</a>
+            </li>
+            <?php endif; ?>
+            <?php if ($page + 1 < $max_page) : ?>
+            <li>
+               <a href="?page=<?php echo $page + 2; ?>">Sledeća »</a>
+            </li>
+            <?php endif; ?>
+         </ul>
+      </div>
+      <?php endif; ?>
     </section>
     <?php include('includes/footer.php') ?>
   </body>

@@ -16,7 +16,10 @@
           <a href="/tourizm/index.php">Početna</a>
         </li>
         <li>
-          <a href="/tourizm/contact.php">Kontakt</a>
+          <a href="/tourizm/ponude.php">Sve ponude</a>
+        </li>
+        <li>
+          <a href="/tourizm/kontakt.php">Kontakt</a>
         </li>
         <?php
           if (!user_logged_in())
@@ -31,13 +34,13 @@
           {
         ?>
         <li class="admin-login">
-          <a href="/tourizm/admin/logout.php">Logout</a>
+          <a href="/tourizm/admin/logout.php">Odjavi se</a>
         </li>
         <li class="admin-login">
-          <a href="/tourizm/admin/manage-destinations.php">Destinations</a>
+          <a href="/tourizm/admin/manage-destinations.php">Destinacije</a>
         </li>
         <li class="admin-login">
-          <a href="/tourizm/admin/manage-reservations.php">Reservations</a>
+          <a href="/tourizm/admin/manage-reservations.php">Rezervacije</a>
         </li>
         <?php
           }

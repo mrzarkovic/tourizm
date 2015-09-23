@@ -1,6 +1,9 @@
 <?php
   include('../includes/helpers.php');
 
+   $msg_to_user = "";
+   $id = 0;
+
   if (!user_logged_in())
   {
     header('Location: ../login.php');
@@ -8,8 +11,6 @@
   else
   {
 
-    $msg_to_user = "";
-    $id = 0;
 
     if (!empty($_GET) && isset($_GET['id']))
     {
@@ -33,6 +34,13 @@
         $name = $conn->real_escape_string($_POST['name']);
         $description = $conn->real_escape_string($_POST['description']);
         $total_quota = $conn->real_escape_string($_POST['total_quota']);
+        $price = $conn->real_escape_string($_POST['price']);
+
+        $date_from = new DateTime($_POST['date_from']);
+        $date_to = new DateTime($_POST['date_to']);
+
+        $date_from = $date_from->format('Y-m-d H:i:s');
+        $date_to = $date_to->format('Y-m-d H:i:s');
 
         if ($_FILES["image"]["name"])
         {
@@ -58,7 +66,7 @@
           }
         }
 
-        $sql = "UPDATE destinations SET name = '$name', description = '$description', total_quota = '$total_quota', image_path = '$image_path' WHERE id = '$destination_id'";
+        $sql = "UPDATE destinations SET name = '$name', description = '$description', total_quota = '$total_quota', image_path = '$image_path', date_from = '$date_from', date_to = '$date_to', price = '$price' WHERE id = '$destination_id'";
 
        $result = $conn->query($sql);
 
@@ -86,17 +94,31 @@
     <meta charset="utf-8">
     <title>Tourizm | Edit Destination: <?php echo $destination->name; ?></title>
     <link rel="stylesheet" type="text/css" href="../css/style.css" />
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <script>
+      $(function() {
+          $( "#date_from" ).datepicker({
+             dateFormat: "dd-mm-yy"
+          });
+          $( "#date_to" ).datepicker({
+             dateFormat: "dd-mm-yy"
+          });
+      });
+    </script>
   </head>
   <body>
     <?php include('../includes/header.php') ?>
     <section class="main content">
-      <h1>Edit destination: <?php echo $destination->name; ?></h1>
+      <?php if ($destination) : ?>
+      <h1>Izmeni destinaciju: <?php echo $destination->name; ?></h1>
       <ul class="admin-submenu clearfix">
         <li>
-          <a href="manage-destinations.php">Destinations list</a>
+          <a href="manage-destinations.php">Lista destinacija</a>
         </li>
         <li>
-          <a href="add-destination.php">Add Destination</a>
+          <a href="add-destination.php">Dodaj destinaciju</a>
         </li>
       </ul>
       <p class="notice">
@@ -122,9 +144,24 @@
           <input type="text" name="total_quota" id="total_quota" value="<?php echo $destination->total_quota; ?>"/>
         </div>
         <div class="form-field">
-          <input type="submit" name="submit" value="Izmeni destianciju" />
+           <label for="date_from">Datum od:</label>
+           <input type="text" name="date_from" id="date_from" value="<?php echo $destination->date_from; ?>">
+        </div>
+        <div class="form-field">
+           <label for="date_to">Datum od:</label>
+           <input type="text" name="date_to" id="date_to" value="<?php echo $destination->date_to; ?>">
+        </div>
+        <div class="form-field">
+           <label for="price">Cena:</label>
+           <input type="text" name="price" id="price" value="<?php echo $destination->price; ?>"> RSD
+        </div>
+        <div class="form-field">
+          <input type="submit" name="submit" value="Sačuvaj izmene" />
         </div>
       </form>
+      <?php else : ?>
+         <p class="notice">Ne postojeća destinacija.</p>
+      <?php endif; ?>
     </section>
     <?php include('../includes/footer.php') ?>
   </body>
