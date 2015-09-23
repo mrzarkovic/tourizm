@@ -35,7 +35,7 @@
          foreach ($destinations as $destination)
          { ?>
           <div class="destination">
-            <h1><?php echo $destination->name; ?> <small>(<time><?php echo get_pretty_date($destination->date_from); ?></time> - <time><?php echo get_pretty_date($destination->date_to); ?></time>)</small></h1>
+            <h1><?php echo $destination->name; ?> <small>još <span class="bold"><?php echo get_reservatons_left($destination); ?></span> aranžmana (<time><?php echo get_pretty_date($destination->date_from); ?></time> - <time><?php echo get_pretty_date($destination->date_to); ?></time>)</small></h1>
             <p><?php echo getExcerpt($destination->description); ?></p>
             <div class="destination-price">
               <?php echo $destination->price; ?> RSD

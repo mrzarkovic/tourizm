@@ -242,6 +242,10 @@ input[type="submit"] {
    padding: 3px 5px;
 }
 
+.bold {
+   font-weight: bold !important;
+}
+
 /* end of DESTINATIONS */
 
 /* FORM FIELDS */

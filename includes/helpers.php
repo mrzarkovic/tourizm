@@ -30,6 +30,34 @@ function user_logged_in()
 
 /* DESTINATIONS */
 
+function get_total_reservations_for_destination($destination_id = 0)
+{
+   $conn = connect_to_db();
+   $sql = "SELECT total_quota FROM destinations WHERE id = '$destination_id'";
+
+   $result = $conn->query($sql);
+
+   if ($result->num_rows > 0)
+   {
+     $row = $result->fetch_object();
+     $max_quota = $row->total_quota;
+     return $max_quota;
+   }
+   else
+   {
+     return false;
+   }
+}
+
+function get_reservatons_left($destination)
+{
+   $total_quota = $destination->total_quota;
+   $reservations = get_reservations_for_destination($destination->id);
+   $total_reservations = count($reservations);
+
+   return (int) $total_quota - (int) $total_reservations;
+}
+
 function find_destinations($keyword = "")
 {
    $conn = connect_to_db();
@@ -137,6 +165,31 @@ function get_reservations()
     return false;
   }
 }
+
+function get_reservations_for_destination( $destination_id )
+{
+  $conn = connect_to_db();
+
+  $sql = "SELECT * FROM reservations WHERE destination_id = '$destination_id'";
+
+  $result = $conn->query($sql);
+
+  $reservations = array();
+
+  if ($result->num_rows > 0)
+  {
+    while($destination = $result->fetch_object())
+    {
+      $reservations[] = $destination;
+    }
+    return $reservations;
+  }
+  else
+  {
+    return false;
+  }
+}
+
 
 /* end of RESERVATIONS */
 
