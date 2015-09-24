@@ -52,7 +52,8 @@
         ?>
       </div>
       <section class="about">
-         <h1>O agenciji Tourizm</h1>
+         <h1>O agenciji <span class="tourizm">Tourizm</span> d.o.o.</h1>
+         <h2>Putovanja i putešestvije</h2>
          <p>Sed vel sapien fermentum, tincidunt tortor at, sagittis nunc. Etiam eu pharetra sapien. Fusce pretium orci neque, consequat fringilla sapien posuere a. Aenean ornare sapien vitae odio sollicitudin convallis.</p>
          <p>Donec viverra nisl sed consequat feugiat. Proin ornare justo a metus finibus, quis commodo mauris scelerisque. Ut magna nunc, elementum nec augue nec, sodales semper tortor. Vestibulum ullamcorper, sapien quis pulvinar mattis, erat odio congue lacus, vel pharetra velit est vel nulla.</p>
          <p>Cras varius ligula arcu, non suscipit tortor dapibus sed. Nulla vel molestie turpis. Quisque quis eleifend sem. Ut at imperdiet sapien, eu malesuada massa. Vestibulum nec commodo libero, gravida vestibulum nulla.</p>

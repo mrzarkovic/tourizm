@@ -30,25 +30,6 @@ function user_logged_in()
 
 /* DESTINATIONS */
 
-function get_total_reservations_for_destination($destination_id = 0)
-{
-   $conn = connect_to_db();
-   $sql = "SELECT total_quota FROM destinations WHERE id = '$destination_id'";
-
-   $result = $conn->query($sql);
-
-   if ($result->num_rows > 0)
-   {
-     $row = $result->fetch_object();
-     $max_quota = $row->total_quota;
-     return $max_quota;
-   }
-   else
-   {
-     return false;
-   }
-}
-
 function get_reservatons_left($destination)
 {
    $total_quota = $destination->total_quota;
