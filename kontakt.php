@@ -55,7 +55,7 @@
          Telefon: 011/123-4-567<br>
          Email: kontakt@tourizm.app</p>
       <p class="notice"><?php echo $msg_to_user; ?></p>
-      <form action="kontakt.php" method="post">
+      <form action="kontakt.php" method="post" class="contact">
          <div class="form-field">
             <label for="name">Vaše ime:</label>
             <input type="text" name="name" id="name"/>

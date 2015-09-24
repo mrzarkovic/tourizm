@@ -74,7 +74,7 @@
       <div class="date">
          <time><?php echo get_pretty_date($destination->date_from); ?></time> - <time><?php echo get_pretty_date($destination->date_to); ?></time>
       </div>
-      <p>Preostalo je još <span class="bold"><?php echo get_reservatons_left($destination); ?></span> aranžmana</p>
+      <p>Preostalo je još <span class="bold"><?php echo get_reservatons_left($destination); ?></span> aranžmana.</p>
       <p class="notice">
         <?php echo $msg_to_user; ?>
       </p>

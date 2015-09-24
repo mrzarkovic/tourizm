@@ -14,7 +14,7 @@ else
 
     $conn = connect_to_db();
     $id = $conn->real_escape_string($_GET['id']);
-    $sql = "DELETE FROM destinations WHERE id = '$id'";
+    $sql = "DELETE FROM reservations WHERE id = '$id'";
     $conn->query($sql);
 
     if ($error = $conn->error)
@@ -23,7 +23,7 @@ else
     }
     else
     {
-      $msg_to_user = "Uspešno ste obrisali destinaciju.";
+      $msg_to_user = "Uspešno ste obrisali rezervaciju.";
     }
 
     $conn->close();
@@ -34,7 +34,7 @@ else
   <html>
     <head>
       <meta charset="utf-8">
-      <title>Tourizm | Delete Destination</title>
+      <title>Tourizm | Delete Reservation</title>
       <link rel="stylesheet" type="text/css" href="../css/style.css" />
       <script src="//code.jquery.com/jquery-1.10.2.js"></script>
       <script src="../js/main.js"></script>
@@ -42,15 +42,7 @@ else
     <body>
       <?php include('../includes/header.php') ?>
       <section class="main content">
-        <h1>Obriši destinaciju</h1>
-        <ul class="admin-submenu clearfix">
-          <li>
-            <a href="manage-destinations.php">Lista destinacija</a>
-          </li>
-          <li>
-            <a href="add-destination.php">Dodaj destinaciju</a>
-          </li>
-        </ul>
+        <h1>Brisanje rezervacije</h1>
         <p class="notice">
           <?php echo $msg_to_user; ?>
         </p>

@@ -16,6 +16,8 @@
     <meta charset="utf-8">
     <title>Tourizm | Manage Reservations</title>
     <link rel="stylesheet" type="text/css" href="../css/style.css" />
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="../js/main.js"></script>
   </head>
   <body>
     <?php include('../includes/header.php') ?>
@@ -33,7 +35,10 @@
           $destination = get_destination($reservation->destination_id);
         ?>
           <li>
-            <b><?php echo $destination->name; ?></b> <?php echo $reservation->customer_name; ?> (<?php echo $reservation->customer_phone; ?>, <a href="mailto:<?php echo $reservation->customer_email; ?>"><?php echo $reservation->customer_email; ?></a>)
+            <b><?php echo $destination->name; ?></b><br>Ime: <?php echo $reservation->customer_name; ?> | Tel: <?php echo $reservation->customer_phone; ?> |  Email: <a href="mailto:<?php echo $reservation->customer_email; ?>"><?php echo $reservation->customer_email; ?></a>
+            <div class="control">
+               <a data-role="del" href="delete-reservation.php?id=<?php echo $destination->id; ?>">obriši</a>
+            </div>
           </li>
         <?php
         }

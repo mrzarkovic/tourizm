@@ -18,6 +18,7 @@
     <title>Tourizm | Manage Destinations</title>
     <link rel="stylesheet" type="text/css" href="../css/style.css" />
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="../js/main.js"></script>
   </head>
   <body>
     <?php include('../includes/header.php') ?>
@@ -34,16 +35,17 @@
         {
          foreach ($destinations as $destination)
          { ?>
-          <div class="destination">
+          <div class="destination clearfix">
             <h1><?php echo $destination->name; ?> <small>još <span class="bold"><?php echo get_reservatons_left($destination); ?></span> aranžmana (<time><?php echo get_pretty_date($destination->date_from); ?></time> - <time><?php echo get_pretty_date($destination->date_to); ?></time>)</small></h1>
             <p><?php echo getExcerpt($destination->description); ?></p>
+            <div class="control">
+              <a href="edit-destination.php?id=<?php echo $destination->id; ?>">Izmeni</a>
+              <a href="delete-destination.php?id=<?php echo $destination->id; ?>" data-role="del">Obriši</a>
+            </div>
             <div class="destination-price">
               <?php echo $destination->price; ?> RSD
             </div>
-            <div class="control">
-              <a href="edit-destination.php?id=<?php echo $destination->id; ?>">Izmeni</a>
-              <a href="delete-destination.php?id=<?php echo $destination->id; ?>" class="del">Obriši</a>
-            </div>
+
           </div>
           <!-- end of .destination -->
         <?php
@@ -61,15 +63,6 @@
       </div>
     </section>
     <?php include('../includes/footer.php') ?>
-    <script>
-    $(document).ready(function(){
-     $(".del").click(function(){
-       if (!confirm("Da li ste sigurni da želite da obrišete destinaciju?")){
-         return false;
-       }
-     });
-   });
-    </script>
   </body>
 </html>
 <?php

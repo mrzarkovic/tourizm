@@ -137,6 +137,7 @@
         </div>
         <div class="form-field">
           <label for="image">Fotografija:</label>
+          <div class="image-preview"><img src="../img/destinations/<?php echo $destination->image_path;?>"/></div>
           <input type="file" name="image" id="image">
         </div>
         <div class="form-field">

@@ -219,6 +219,12 @@ input[type="submit"] {
    background: rgb(25, 132, 158);
 }
 
+.single-destination a:hover,
+input[type="submit"]:hover {
+   background: rgb(61, 155, 177);
+   cursor: pointer;
+}
+
 .date {
    margin-bottom: 10px;
    font-style: italic;
@@ -263,11 +269,27 @@ input[type="submit"] {
 
 .form-field label {
    display: block;
+   padding: 5px 0;
 }
 
 .form-field textarea {
    padding: 3px 5px;
-   width: 500px;
+   max-width: 600px;
+   width: 600px;
+   min-height: 200px;
+}
+
+.form-field .image-preview {
+   padding: 10px 0;
+}
+
+.form-field .image-preview img {
+   width: 300px;
+   border-radius: 5px;
+}
+
+.contact .form-field textarea {
+   max-width: 500px;
    min-height: 100px;
 }
 
@@ -288,7 +310,7 @@ input[type="submit"] {
 .admin-submenu li a {
    display: inline-block;
    border: 0;
-   margin: 0 5px;
+   margin: 0 5px 0 0;
    font-size: 14px;
    color: #fff;
    padding: 5px 10px;
@@ -296,8 +318,18 @@ input[type="submit"] {
    background: rgb(25, 132, 158);
 }
 
+.admin-submenu a:hover {
+   background: rgb(61, 155, 177);
+   cursor: pointer;
+}
+
 .admin-destinations .destination {
    margin: 10px 0;
+   padding: 5px;
+}
+
+.admin-destinations .destination:hover {
+   background: #f7f7f7;
 }
 
 .admin-destinations .destination h1 * {
@@ -313,9 +345,17 @@ input[type="submit"] {
    color: rgb(25, 132, 158);
 }
 
+.admin-destinations .destination a:hover {
+   color: rgb(189, 52, 52);
+}
+
 .reservations ol {
    margin: 10px 0;
    padding: 0 0 0 20px;
+}
+
+.reservations ol li {
+   padding: 5px 10px;
 }
 
 .reservations ol li a {
@@ -324,6 +364,23 @@ input[type="submit"] {
    padding: 5px 0;
    text-decoration: underline;
    color: rgb(25, 132, 158);
+}
+
+.reservations ol li a:hover {
+   color: rgb(189, 52, 52);
+}
+
+
+.reservations ol li:hover {
+   background: #f7f7f7;
+}
+
+.control {
+   float: right;
+}
+
+.goback:hover {
+   cursor: pointer;
 }
 
 /* end of ADMIN */
@@ -359,7 +416,22 @@ input[type="submit"] {
    padding: 5px 10px;
 }
 
+.pagination ul li a:hover {
+   color: rgb(25, 132, 158);
+}
+
 /* end of PAGINATION */
+
+.goback {
+   display: inline-block;
+   border: 0;
+   margin: 10px 5px 0;
+   font-size: 14px;
+   color: #fff;
+   padding: 5px 10px;
+   border-radius: 3px;
+   background: rgb(25, 132, 158);
+}
 
 .notice {
    margin: 5px 0;
