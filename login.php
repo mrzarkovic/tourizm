@@ -13,41 +13,7 @@ if (!empty($_POST))
   }
   else
   {
-    // Database connection
-    $db_user = "root";
-    $db_pass = "";
-    $hostname = "localhost";
-    $db_name   = "tourizm";
-
-    $conn = new mysqli($hostname, $db_user, $db_pass, $db_name);
-
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
-
-    // Prevent SQL Injection
-    $username = $conn->real_escape_string($_POST['username']);
-    $password = $conn->real_escape_string($_POST['password']);
-
-    // Encrypt the pasword
-    $password = md5($password);
-
-    // Check credentials
-    $sql = "SELECT * FROM users WHERE username = '$username' AND password = '$password'";
-
-    $result = $conn->query($sql);
-
-    if ($result->num_rows > 0)
-    {
-      $_SESSION['username'] = $username;
-      header('Location: admin/manage-destinations.php');
-    }
-    else
-    {
-      $msg_to_user = "Pogrešan username ili password.";
-    }
-
-    $conn->close();
+    login_user();
   }
 }
 ?>

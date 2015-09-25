@@ -11,22 +11,8 @@ else
 {
   if (!empty($_GET) && isset($_GET['id']))
   {
-
-    $conn = connect_to_db();
-    $id = $conn->real_escape_string($_GET['id']);
-    $sql = "DELETE FROM reservations WHERE id = '$id'";
-    $conn->query($sql);
-
-    if ($error = $conn->error)
-    {
-      $msg_to_user = "Došlo je do greske pri brisanju. " . $error;
-    }
-    else
-    {
-      $msg_to_user = "Uspešno ste obrisali rezervaciju.";
-    }
-
-    $conn->close();
+    $id = $_GET['id'];
+    $msg_to_user = delete_reservation( $id );
   }
 
   ?>

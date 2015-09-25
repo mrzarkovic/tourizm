@@ -5,37 +5,7 @@
 
   if ((!empty($_POST))&&(isset($_POST['submit'])))
   {
-      $name = $_POST['name'];
-      $message = $_POST['message'];
-      $email = $_POST['email'];
-
-      if (($message != "")&&($email != ""))
-      {
-         $message = wordwrap($message, 70, "\r\n");
-
-         // To send HTML mail, the Content-type header must be set
-         $headers  = 'MIME-Version: 1.0' . "\r\n";
-         $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-
-         // Additional headers
-         $headers .= 'To: Kontakt <kontakt@tourizm.rs>' . "\r\n";
-         $headers .= 'From: '.$name.' <'.$email.'>' . "\r\n";
-
-         $send_email = mail('kontakt@tourizm.rs', 'Poruka sa sajta', $message, $headers);
-
-         if ($send_email)
-         {
-            $msg_to_user = "Poruka je poslata! Hvala.";
-         }
-         else
-         {
-            $msg_to_user = "Došlo je do greške pri slanju poruke.";
-         }
-      }
-      else
-      {
-         $msg_to_user = "Molimo napišete poruku i Vašu email adresu. Hvala.";
-      }
+      $msg_to_user = send_contact_message();
   }
 
 ?>

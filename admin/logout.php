@@ -1,11 +1,6 @@
 <?php
 
-include('../includes/helpers.php');
+   include('../includes/helpers.php');
+   logout_user();
 
-if ( $user = user_logged_in() )
-{
-  // remove all session variables
-  session_unset();
-}
-header('Location: /tourizm/login.php');
 ?>

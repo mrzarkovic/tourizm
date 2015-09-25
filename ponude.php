@@ -3,10 +3,12 @@
 
   $msg_to_user = "";
 
+  // Limit destinations per page
   $per_page = 4;
 
   if (!empty($_GET['page']))
   {
+     // Get the current page
      $page = (int) $_GET['page'] - 1;
   }
   else
@@ -23,7 +25,7 @@
   if (!empty($_POST['search']))
   {
       $keyword = $_POST['search'];
-      $destinations = find_destinations($keyword);
+      $destinations = find_destinations( $keyword );
   }
 
 ?>

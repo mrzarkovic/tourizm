@@ -10,80 +10,14 @@
   }
   else
   {
-
-
     if (!empty($_GET) && isset($_GET['id']))
     {
      $id = $_GET['id'];
     }
     else if (!empty($_POST))
     {
-      $destination_id = $_POST['destination_id'];
-      // Check input
-      if ( ($_POST['name'] == '') || ($_POST['description'] == '') || ($_POST['total_quota'] == ''))
-      {
-        $msg_to_user = "Morate popuniti sva polja.";
-      }
-      else
-      {
-        $conn = connect_to_db();
-
-        $image_path = $_POST['image_path'];
-
-        // Prevent SQL Injection
-        $name = $conn->real_escape_string($_POST['name']);
-        $description = $conn->real_escape_string($_POST['description']);
-        $total_quota = $conn->real_escape_string($_POST['total_quota']);
-        $price = $conn->real_escape_string($_POST['price']);
-
-        $date_from = new DateTime($_POST['date_from']);
-        $date_to = new DateTime($_POST['date_to']);
-
-        $date_from = $date_from->format('Y-m-d H:i:s');
-        $date_to = $date_to->format('Y-m-d H:i:s');
-
-        if ($_FILES["image"]["name"])
-        {
-           $target_dir = "../img/destinations/";
-          $target_file = $target_dir . basename($_FILES["image"]["name"]);
-          $upload_ok = 1;
-          $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
-
-          $image_path = basename($_FILES["image"]["name"]);
-
-          // Check if file is image
-          $check = getimagesize($_FILES["image"]["tmp_name"]);
-          if( $check !== false )
-          {
-            if (!move_uploaded_file($_FILES["image"]["tmp_name"], $target_file))
-            {
-              $msg_to_user = "Greska prilikom uploadovanja";
-            }
-          }
-          else
-          {
-              $msg_to_user = "Pogresan fajl.";
-          }
-        }
-
-        $sql = "UPDATE destinations SET name = '$name', description = '$description', total_quota = '$total_quota', image_path = '$image_path', date_from = '$date_from', date_to = '$date_to', price = '$price' WHERE id = '$destination_id'";
-
-       $result = $conn->query($sql);
-
-       if ($error = $conn->error)
-       {
-         $msg_to_user = "Došlo je do greske pri čuvanju. " . $error;
-       }
-       else
-       {
-         $msg_to_user = "Uspešno ste izmenili destinaciju: " . $name;
-       }
-
-
-        $conn->close();
-      }
-
-      $id = $destination_id;
+      $id = $_POST['destination_id'];
+      $msg_to_user = edit_destination( $id );
     }
 
     $destination = get_destination( $id );

@@ -11,49 +11,9 @@
   }
   else if (!empty($_POST) && isset($_POST['destination_id']))
   {
-    $destination_id = $_POST['destination_id'];
-    $destination_name = $_POST['destination_name'];
+    $id = $_POST['destination_id'];
 
-    $reservations_left = $_POST['reservations_left'];
-
-    if ($reservations_left > 0)
-    {
-       // Check input
-       if ( ($_POST['customer_name'] == '') || ($_POST['customer_email'] == '') || ($_POST['customer_phone'] == ''))
-       {
-         $msg_to_user = "Morate popuniti sva polja.";
-       }
-       else
-       {
-         $conn = connect_to_db();
-
-         // Prevent SQL Injection
-         $customer_name = $conn->real_escape_string($_POST['customer_name']);
-         $customer_email = $conn->real_escape_string($_POST['customer_email']);
-         $customer_phone = $conn->real_escape_string($_POST['customer_phone']);
-
-         $sql = "INSERT INTO reservations (destination_id, customer_name, customer_email, customer_phone) VALUES ('$destination_id', '$customer_name', '$customer_email', '$customer_phone')";
-
-         $result = $conn->query($sql);
-
-         if ($error = $conn->error)
-         {
-           $msg_to_user = "Došlo je do greske pri čuvanju rezervacije. " . $error;
-         }
-         else
-         {
-           $msg_to_user = "Uspešno ste rezervisali destinaciju: " . $destination_name;
-         }
-
-         $conn->close();
-       }
-    }
-    else
-    {
-       $msg_to_user = "Nema više slobodnih mesta za ovu destinaciju.";
-    }
-
-    $id = $destination_id;
+    $msg_to_user = make_reservation( $id );
 
   }
 
@@ -80,8 +40,6 @@
       </p>
       <form action="rezervisi.php" method="post">
         <input type="hidden" name="destination_id" value="<?php echo $destination->id; ?>">
-        <input type="hidden" name="destination_name" value="<?php echo $destination->name; ?>"/>
-        <input type="hidden" name="reservations_left" value="<?php echo get_reservatons_left($destination); ?>"/>
         <div class="form-field">
           <label for="name">Vaše ime:</label>
           <input type="text" name="customer_name" id="name" value="" />

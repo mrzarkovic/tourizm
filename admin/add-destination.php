@@ -12,65 +12,7 @@ else
 
    if (!empty($_POST))
    {
-      // Check input
-      if ( ($_POST['name'] == '') || ($_POST['description'] == '') || ($_POST['total_quota'] == ''))
-      {
-         $msg_to_user = "Morate popuniti sva polja.";
-      }
-      else
-      {
-         $conn = connect_to_db();
-
-         // Prevent SQL Injection
-         $name = $conn->real_escape_string($_POST['name']);
-         $description = $conn->real_escape_string($_POST['description']);
-         $total_quota = $conn->real_escape_string($_POST['total_quota']);
-         $price = $conn->real_escape_string($_POST['price']);
-
-         $date_from = new DateTime($_POST['date_from']);
-         $date_to = new DateTime($_POST['date_to']);
-
-         $date_from = $date_from->format('Y-m-d H:i:s');
-         $date_to = $date_to->format('Y-m-d H:i:s');
-
-         $target_dir = "../img/destinations/";
-         $target_file = $target_dir . basename($_FILES["image"]["name"]);
-         $upload_ok = 1;
-         $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
-
-         $image_path = basename($_FILES["image"]["name"]);
-
-         // Check if file is image
-         $check = getimagesize($_FILES["image"]["tmp_name"]);
-         if( $check !== false )
-         {
-            if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file))
-            {
-               $sql = "INSERT INTO destinations (name, description, total_quota, image_path, date_from, date_to, price) VALUES ('$name', '$description', '$total_quota', '$image_path', '$date_from', '$date_to', '$price')";
-
-               $result = $conn->query($sql);
-
-               if ($error = $conn->error)
-               {
-                  $msg_to_user = "Došlo je do greske pri čuvanju. " . $error;
-               }
-               else
-               {
-                  $msg_to_user = "Uspešno ste dodali destinaciju: " . $name;
-               }
-            }
-            else
-            {
-               $msg_to_user = "Greska prilikom uploadovanja";
-            }
-         }
-         else
-         {
-            $msg_to_user = "Pogresan fajl.";
-         }
-
-         $conn->close();
-      }
+      $msg_to_user = add_destination();
    }
    ?>
    <!DOCTYPE html>
