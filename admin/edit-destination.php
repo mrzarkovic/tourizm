@@ -1,26 +1,24 @@
 <?php
-  include('../includes/helpers.php');
+  include('../includes/app.class.php');
+  $app = new App();
 
-   $msg_to_user = "";
-   $id = 0;
-
-  if (!user_logged_in())
+  if ( !$app->user_logged_in() )
   {
     header('Location: ../login.php');
   }
   else
   {
-    if (!empty($_GET) && isset($_GET['id']))
+    if ( !empty( $_GET ) && isset( $_GET['id'] ) )
     {
      $id = $_GET['id'];
     }
-    else if (!empty($_POST))
+    else if ( !empty( $_POST ) )
     {
       $id = $_POST['destination_id'];
-      $msg_to_user = edit_destination( $id );
+      $app->edit_destination( $id );
     }
 
-    $destination = get_destination( $id );
+    $destination = $app->get_destination( $id );
 ?>
 <!DOCTYPE html>
 <html>
@@ -45,7 +43,7 @@
   <body>
     <?php include('../includes/header.php') ?>
     <section class="main content">
-      <?php if ($destination) : ?>
+      <?php if ( $destination) : ?>
       <h1>Izmeni destinaciju: <?php echo $destination->name; ?></h1>
       <ul class="admin-submenu clearfix">
         <li>
@@ -56,7 +54,7 @@
         </li>
       </ul>
       <p class="notice">
-        <?php echo $msg_to_user; ?>
+        <?php echo $app->msg_to_user; ?>
       </p>
       <form action="edit-destination.php" method="post" enctype="multipart/form-data">
          <input type="hidden" name="destination_id" value="<?php echo $destination->id; ?>">

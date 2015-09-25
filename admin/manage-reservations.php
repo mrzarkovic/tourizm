@@ -1,14 +1,15 @@
 <?php
-  include('../includes/helpers.php');
+  include('../includes/app.class.php');
+  $app = new App();
 
-  if (!user_logged_in())
+  if ( !$app->user_logged_in() )
   {
     header('Location: ../login.php');
   }
   else
   {
 
-    $reservations = get_reservations();
+    $reservations = $app->get_reservations();
 
 ?>
 <!DOCTYPE html>
@@ -26,14 +27,14 @@
       <h1>Sve rezervacije</h1>
       <div class="reservations">
         <?php
-        if ($reservations)
+        if ( $reservations )
         {
         ?>
         <ol>
         <?php
-        foreach ($reservations as $reservation)
+        foreach ( $reservations as $reservation )
         {
-          $destination = get_destination($reservation->destination_id);
+          $destination = $app->get_destination( $reservation->destination_id );
         ?>
           <li>
             <b><?php echo $destination->name; ?></b><br>Ime: <?php echo $reservation->customer_name; ?> | Tel: <?php echo $reservation->customer_phone; ?> |  Email: <a href="mailto:<?php echo $reservation->customer_email; ?>"><?php echo $reservation->customer_email; ?></a>

@@ -22,7 +22,7 @@
           <a href="/tourizm/kontakt.php">Kontakt</a>
         </li>
         <?php
-          if (!user_logged_in())
+          if (!$app->user_logged_in())
           {
         ?>
         <li class="admin-login">

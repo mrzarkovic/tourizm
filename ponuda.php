@@ -3,10 +3,10 @@
 if (!empty($_GET) && isset($_GET['id']))
 {
 
-   include_once('includes/helpers.php');
-
+   include_once('includes/app.class.php');
+   $app = new App();
    $id = $_GET['id'];
-   $destination = get_destination($id);
+   $destination = $app->get_destination($id);
 
    ?>
    <!DOCTYPE html>
@@ -23,7 +23,7 @@ if (!empty($_GET) && isset($_GET['id']))
             <?php if ($destination) : ?>
                <h1><?php echo $destination->name; ?></h1>
                <div class="date">
-                  <time><?php echo get_pretty_date($destination->date_from); ?></time> - <time><?php echo get_pretty_date($destination->date_to); ?></time>
+                  <time><?php echo $app->get_pretty_date($destination->date_from); ?></time> - <time><?php echo $app->get_pretty_date($destination->date_to); ?></time>
                </div>
                <p>
                   <img src="img/destinations/<?php echo $destination->image_path; ?>" width="400"/>

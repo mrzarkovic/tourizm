@@ -1,11 +1,11 @@
 <?php
-  include_once('includes/helpers.php');
+  include_once('includes/app.class.php');
 
-  $msg_to_user = "";
+  $app = new App();
 
-  if ((!empty($_POST))&&(isset($_POST['submit'])))
+  if ( ( !empty( $_POST ) ) && ( isset( $_POST['submit'] ) ) )
   {
-      $msg_to_user = send_contact_message();
+      $app->send_contact_message();
   }
 
 ?>
@@ -26,7 +26,7 @@
       <p>Adresa: Danijelova 32<br>
          Telefon: 011/123-4-567<br>
          Email: kontakt@tourizm.app</p>
-      <p class="notice"><?php echo $msg_to_user; ?></p>
+      <p class="notice"><?php echo $app->msg_to_user; ?></p>
       <form action="kontakt.php" method="post" class="contact">
          <div class="form-field">
             <label for="name">Vaše ime:</label>

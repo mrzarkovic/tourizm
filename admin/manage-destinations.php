@@ -1,14 +1,14 @@
 <?php
-  include('../includes/helpers.php');
+  include('../includes/app.class.php');
+  $app = new App();
 
-  if (!user_logged_in())
+  if ( !$app->user_logged_in() )
   {
     header('Location: ../login.php');
   }
   else
   {
-
-    $destinations = get_destinations();
+    $destinations = $app->get_destinations();
 
 ?>
 <!DOCTYPE html>
@@ -31,13 +31,13 @@
       </ul>
       <div class="admin-destinations">
         <?php
-        if ($destinations)
+        if ( $destinations )
         {
-         foreach ($destinations as $destination)
+         foreach ( $destinations as $destination )
          { ?>
           <div class="destination clearfix">
-            <h1><?php echo $destination->name; ?> <small>još <span class="bold"><?php echo get_reservatons_left($destination); ?></span> aranžmana (<time><?php echo get_pretty_date($destination->date_from); ?></time> - <time><?php echo get_pretty_date($destination->date_to); ?></time>)</small></h1>
-            <p><?php echo getExcerpt($destination->description); ?></p>
+            <h1><?php echo $destination->name; ?> <small>još <span class="bold"><?php echo $app->get_reservatons_left( $destination ); ?></span> aranžmana (<time><?php echo $app->get_pretty_date( $destination->date_from ); ?></time> - <time><?php echo $app->get_pretty_date( $destination->date_to ); ?></time>)</small></h1>
+            <p><?php echo $app->get_excerpt( $destination->description ); ?></p>
             <div class="control">
               <a href="edit-destination.php?id=<?php echo $destination->id; ?>">Izmeni</a>
               <a href="delete-destination.php?id=<?php echo $destination->id; ?>" data-role="del">Obriši</a>

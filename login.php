@@ -1,20 +1,11 @@
 <?php
 
-include('includes/helpers.php');
+include('includes/app.class.php');
+$app = new App();
 
-$msg_to_user = "";
-
-if (!empty($_POST))
+if ( !empty( $_POST ) )
 {
-  // Check input
-  if ( ($_POST['username'] == '') || ($_POST['password'] == ''))
-  {
-    $msg_to_user = "Morate popuniti sva polja.";
-  }
-  else
-  {
-    login_user();
-  }
+   $app->login_user();
 }
 ?>
 <!DOCTYPE html>
@@ -29,7 +20,7 @@ if (!empty($_POST))
     <section class="main content">
       <h1>Prijava na sistem</h1>
       <p class="notice">
-        <?php echo $msg_to_user; ?>
+        <?php echo $app->msg_to_user; ?>
       </p>
       <form action="login.php" method="post">
         <div class="form-field">

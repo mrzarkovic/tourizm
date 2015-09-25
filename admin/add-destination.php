@@ -1,18 +1,17 @@
 <?php
-include('../includes/helpers.php');
+include('../includes/app.class.php');
+$app = new App();
 
-if (!user_logged_in())
+if ( !$app->user_logged_in() )
 {
    header('Location: ../login.php');
 }
 else
 {
 
-   $msg_to_user = "";
-
-   if (!empty($_POST))
+   if ( !empty( $_POST ) )
    {
-      $msg_to_user = add_destination();
+      $app->add_destination();
    }
    ?>
    <!DOCTYPE html>
@@ -45,7 +44,7 @@ else
             </li>
          </ul>
          <p class="notice">
-            <?php echo $msg_to_user; ?>
+            <?php echo $app->msg_to_user; ?>
          </p>
          <form action="add-destination.php" method="post" enctype="multipart/form-data">
             <div class="form-field">

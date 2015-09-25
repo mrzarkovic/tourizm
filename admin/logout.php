@@ -1,6 +1,7 @@
 <?php
 
-   include('../includes/helpers.php');
-   logout_user();
+   include('../includes/app.class.php');
+   $app = new App();
+   $app->logout_user();
 
 ?>

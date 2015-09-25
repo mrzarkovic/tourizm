@@ -1,8 +1,8 @@
 <?php
-  include_once('includes/helpers.php');
+  include_once('includes/app.class.php');
 
-  $msg_to_user = "";
-  $destinations = get_destinations( $limit = 4 );
+  $app = new App();
+  $destinations = $app->get_destinations( $limit = 4 );
 
 ?>
 <!DOCTYPE html>
@@ -29,9 +29,9 @@
               </div>
               <h1><?php echo $destination->name; ?></h1>
               <div class="date">
-                 <time><?php echo get_pretty_date($destination->date_from); ?></time> - <time><?php echo get_pretty_date($destination->date_to); ?></time>
+                 <time><?php echo $app->get_pretty_date($destination->date_from); ?></time> - <time><?php echo $app->get_pretty_date($destination->date_to); ?></time>
               </div>
-              <p><?php echo getExcerpt($destination->description); ?></p>
+              <p><?php echo $app->get_excerpt($destination->description); ?></p>
               <div class="destination-price">
                 <?php echo $destination->price; ?> RSD
               </div>

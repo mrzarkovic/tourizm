@@ -1,18 +1,19 @@
 <?php
 
-$msg_to_user = "";
-include('../includes/helpers.php');
+include('../includes/app.class.php');
 
-if (!user_logged_in())
+$app = new App();
+
+if ( !$app->user_logged_in() )
 {
   header('Location: ../login.php');
 }
 else
 {
-  if (!empty($_GET) && isset($_GET['id']))
+  if ( !empty( $_GET ) && isset( $_GET['id'] ) )
   {
-    $id = $_GET['id'];
-    $msg_to_user = delete_destination($id);
+      $id = $_GET['id'];
+      $app->delete_destination( $id );
   }
 
   ?>
@@ -38,7 +39,7 @@ else
           </li>
         </ul>
         <p class="notice">
-          <?php echo $msg_to_user; ?>
+          <?php echo $app->msg_to_user; ?>
         </p>
         <span class="goback" onclick="goBack();">« Nazad</span>
       </section>

@@ -1,7 +1,6 @@
 <?php
-  include_once('includes/helpers.php');
-
-  $msg_to_user = "";
+  include_once('includes/app.class.php');
+  $app = new App();
 
   // Limit destinations per page
   $per_page = 4;
@@ -17,15 +16,15 @@
   }
 
   $start = $per_page * $page;
-  $destinations = get_destinations($per_page, $start);
+  $destinations = $app->get_destinations($per_page, $start);
 
-  $destinations_count = count(get_destinations());
+  $destinations_count = count($app->get_destinations());
   $max_page = ceil($destinations_count / $per_page);
 
   if (!empty($_POST['search']))
   {
       $keyword = $_POST['search'];
-      $destinations = find_destinations( $keyword );
+      $destinations = $app->find_destinations( $keyword );
   }
 
 ?>
@@ -61,9 +60,9 @@
               </div>
               <h1><?php echo $destination->name; ?></h1>
               <div class="date">
-                 <time><?php echo get_pretty_date($destination->date_from); ?></time> - <time><?php echo get_pretty_date($destination->date_to); ?></time>
+                 <time><?php echo $app->get_pretty_date($destination->date_from); ?></time> - <time><?php echo $app->get_pretty_date($destination->date_to); ?></time>
               </div>
-              <p><?php echo getExcerpt($destination->description); ?></p>
+              <p><?php echo $app->get_excerpt($destination->description); ?></p>
               <div class="destination-price">
                 <?php echo $destination->price; ?> RSD
               </div>
@@ -72,7 +71,7 @@
             <!-- end of .destination -->
           <?php
             $i++;
-            if ($i%4 == 0)
+            if ( $i % 4 == 0 )
                echo '<div class="clearfix"></div>';
           }
         }
@@ -86,7 +85,7 @@
         }
         ?>
       </div>
-      <?php if(empty($_POST['search'])) : ?>
+      <?php if( empty( $_POST['search'] ) ) : ?>
       <div class="pagination">
          <ul class="clearfix">
             <?php if ($page > 0 ) : ?>
