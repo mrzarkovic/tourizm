@@ -1,14 +1,17 @@
 <?php
+  session_start();
   include('../includes/app.class.php');
   $app = new App();
+  include('../includes/destination.class.php');
+  $destination = new Destination();
 
-  if ( !$app->user_logged_in() )
+  if ( !$destination->user_logged_in() )
   {
     header('Location: ../login.php');
   }
   else
   {
-    $destinations = $app->get_destinations();
+    $destination->get_destinations();
 
 ?>
 <!DOCTYPE html>
@@ -31,12 +34,12 @@
       </ul>
       <div class="admin-destinations">
         <?php
-        if ( $destinations )
+        if ( $destination->list )
         {
-         foreach ( $destinations as $destination )
+         foreach ( $destination->list as $destination )
          { ?>
           <div class="destination clearfix">
-            <h1><?php echo $destination->name; ?> <small>još <span class="bold"><?php echo $app->get_reservatons_left( $destination ); ?></span> aranžmana (<time><?php echo $app->get_pretty_date( $destination->date_from ); ?></time> - <time><?php echo $app->get_pretty_date( $destination->date_to ); ?></time>)</small></h1>
+            <h1><?php echo $destination->name; ?> <small>još <span class="bold"><?php echo $app->get_reservatons_left( $destination ); ?></span> aranžmana (<time><?php echo $destination->date_from->format('d.m.Y.'); ?></time> - <time><?php echo $destination->date_to->format('d.m.Y.'); ?></time>)</small></h1>
             <p><?php echo $app->get_excerpt( $destination->description ); ?></p>
             <div class="control">
               <a href="edit-destination.php?id=<?php echo $destination->id; ?>">Izmeni</a>

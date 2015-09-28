@@ -11,9 +11,11 @@ class App
    */
    public $msg_to_user;
 
+   public $connection;
+
    function __construct()
    {
-      session_start();
+      $this->connection = $this->connect_to_db();
    }
 
    /**
@@ -65,12 +67,9 @@ class App
       }
       else
       {
-         // Database connection
-         $conn = $this->connect_to_db();
-
          // Prevent SQL Injection
-         $username = $conn->real_escape_string($_POST['username']);
-         $password = $conn->real_escape_string($_POST['password']);
+         $username = $this->connection->real_escape_string($_POST['username']);
+         $password = $this->connection->real_escape_string($_POST['password']);
 
          // Encrypt the pasword
          $password = md5( $password );
@@ -78,7 +77,7 @@ class App
          // Check credentials
          $sql = "SELECT * FROM users WHERE username = '$username' AND password = '$password'";
 
-         $result = $conn->query( $sql );
+         $result = $this->connection->query( $sql );
 
          if ( $result->num_rows > 0 )
          {
@@ -90,7 +89,7 @@ class App
            $this->msg_to_user = "Pogrešan username ili password.";
          }
 
-         $conn->close();
+         $this->connection->close();
       }
    }
 
@@ -130,7 +129,7 @@ class App
     * Search the database for a destination with a keyword
     * @param  string $keyword Search parameter
     * @return array $destinations Array of Objects
-    */
+
    function find_destinations( $keyword = "" )
    {
       $conn = $this->connect_to_db();
@@ -152,13 +151,13 @@ class App
         return false;
       }
    }
-
+ */
    /**
     * Get all the destinations from the database
     * @param  integer $limit How many
     * @param  integer $start Start from position
     * @return array destinations Array of Objects
-    */
+
    function get_destinations( $limit = 0, $start = 0 )
    {
      $conn = $this->connect_to_db();
@@ -189,12 +188,12 @@ class App
        return false;
      }
    }
-
+*/
    /**
     * Return a single destination
     * @param  integer $id Destination id
     * @return Objct destination
-    */
+
    function get_destination( $id = 0 )
    {
      $destination = "";
@@ -215,10 +214,10 @@ class App
        return false;
      }
    }
-
+*/
    /**
     * Add a new destination to the database
-    */
+
    function add_destination()
    {
       // Check input
@@ -280,7 +279,7 @@ class App
          $conn->close();
       }
    }
-
+ */
    /**
     * Edit a destination
     * @param $id Destination id
@@ -326,11 +325,13 @@ class App
             if ( !move_uploaded_file( $_FILES["image"]["tmp_name"], $target_file ) )
             {
               $this->msg_to_user = "Greska prilikom uploadovanja";
+              return false;
             }
           }
           else
           {
               $this->msg_to_user = "Pogresan fajl.";
+              return false;
           }
         }
 
@@ -341,12 +342,13 @@ class App
        if ( $error = $conn->error )
        {
          $this->msg_to_user = "Došlo je do greske pri čuvanju. " . $error;
+         $conn->close();
+         return false;
        }
-       else
-       {
-         $this->msg_to_user = "Uspešno ste izmenili destinaciju: " . $name;
-       }
+
+        $this->msg_to_user = "Uspešno ste izmenili destinaciju: " . $name;
         $conn->close();
+        return true;
       }
 
    }
@@ -379,13 +381,13 @@ class App
     * Format the date from database to display on page
     * @param  string $date
     * @return string pretty_date
-    */
+
    function get_pretty_date( $date = "0000-00-00" )
    {
       $pretty_date = new DateTime( $date );
       return $pretty_date = $pretty_date->format('m.d.Y.');
    }
-
+ */
    /* end of DESTINATIONS */
 
    /* RESERVATIONS */

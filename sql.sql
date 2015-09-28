@@ -34,3 +34,12 @@ CHANGE COLUMN `cutomer_name` `customer_name` VARCHAR(255) NULL DEFAULT NULL ;
 
 ALTER TABLE `tourizm`.`reservations`
 ADD COLUMN `customer_phone` VARCHAR(255) NULL AFTER `customer_email`;
+
+ALTER TABLE `tourizm`.`reservations`
+ADD INDEX `iddestination_idx` (`destination_id` ASC);
+ALTER TABLE `tourizm`.`reservations`
+ADD CONSTRAINT `iddestination`
+  FOREIGN KEY (`destination_id`)
+  REFERENCES `tourizm`.`destinations` (`id`)
+  ON DELETE CASCADE
+  ON UPDATE CASCADE;

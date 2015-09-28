@@ -2,6 +2,9 @@
 include('../includes/app.class.php');
 $app = new App();
 
+include('../includes/destination.class.php');
+$destination = new Destination();
+
 if ( !$app->user_logged_in() )
 {
    header('Location: ../login.php');
@@ -11,7 +14,7 @@ else
 
    if ( !empty( $_POST ) )
    {
-      $app->add_destination();
+      $destination->add_destination();
    }
    ?>
    <!DOCTYPE html>

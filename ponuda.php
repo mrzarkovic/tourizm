@@ -5,8 +5,10 @@ if (!empty($_GET) && isset($_GET['id']))
 
    include_once('includes/app.class.php');
    $app = new App();
+   include_once('includes/destination.class.php');
+   $destination = new Destination();
    $id = $_GET['id'];
-   $destination = $app->get_destination($id);
+   $destination->get_destination( $id );
 
    ?>
    <!DOCTYPE html>
@@ -20,10 +22,10 @@ if (!empty($_GET) && isset($_GET['id']))
       <?php include('includes/header.php') ?>
       <section class="main content">
          <div class="single-destination clearfix">
-            <?php if ($destination) : ?>
+            <?php if ( $destination->name ) : ?>
                <h1><?php echo $destination->name; ?></h1>
                <div class="date">
-                  <time><?php echo $app->get_pretty_date($destination->date_from); ?></time> - <time><?php echo $app->get_pretty_date($destination->date_to); ?></time>
+                  <time><?php echo $destination->date_from->format('d.m.Y'); ?></time> - <time><?php echo $destination->date_to->format('d.m.Y'); ?></time>
                </div>
                <p>
                   <img src="img/destinations/<?php echo $destination->image_path; ?>" width="400"/>
