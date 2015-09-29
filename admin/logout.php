@@ -1,7 +1,5 @@
 <?php
-
-   include('../includes/app.class.php');
-   $app = new App();
+   include_once("../includes/start-up.php");
    $app->logout_user();
 
 ?>

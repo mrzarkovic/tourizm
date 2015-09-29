@@ -1,16 +1,5 @@
 <?php
-  include('../includes/app.class.php');
-  $app = new App();
-
-  if ( !$app->user_logged_in() )
-  {
-    header('Location: ../login.php');
-  }
-  else
-  {
-
-    $reservations = $app->get_reservations();
-
+  include_once("../includes/start-up.php");
 ?>
 <!DOCTYPE html>
 <html>
@@ -22,46 +11,13 @@
     <script src="../js/main.js"></script>
   </head>
   <body>
-    <?php include('../includes/header.php') ?>
-    <section class="main content">
-      <h1>Sve rezervacije</h1>
-      <div class="reservations">
-        <?php
-        if ( $reservations )
-        {
-        ?>
-        <ol>
-        <?php
-        foreach ( $reservations as $reservation )
-        {
-          $destination = $app->get_destination( $reservation->destination_id );
-        ?>
-          <li>
-            <b><?php echo $destination->name; ?></b><br>Ime: <?php echo $reservation->customer_name; ?> | Tel: <?php echo $reservation->customer_phone; ?> |  Email: <a href="mailto:<?php echo $reservation->customer_email; ?>"><?php echo $reservation->customer_email; ?></a>
-            <div class="control">
-               <a data-role="del" href="delete-reservation.php?id=<?php echo $reservation->id; ?>">obriši</a>
-            </div>
-          </li>
-        <?php
-        }
-        ?>
-        </ol>
-        <?php
-        }
-        else
-        {
-        ?>
-        <p>
-          Nema rezervacija.
-        </p>
-        <?php
-        }
-        ?>
-      </div>
-    </section>
-    <?php include('../includes/footer.php') ?>
+    <?php
+      include('../includes/header.php');
+
+      $reservations = new Reservations();
+      $reservations->manage();
+
+      include('../includes/footer.php');
+    ?>
   </body>
 </html>
-<?php
-  }
-?>

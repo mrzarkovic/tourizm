@@ -30,6 +30,9 @@ class Destination extends App
     */
    function find_destinations( $keyword = "" )
    {
+      // Empty the list array
+      $this->list = array();
+
       $sql = "SELECT * FROM destinations WHERE name LIKE '%$keyword%' OR description LIKE '%$keyword%' ORDER BY id DESC";
       $result = $this->connection->query( $sql );
 
@@ -37,7 +40,7 @@ class Destination extends App
       {
         while( $destination = $result->fetch_assoc() )
         {
-          $this->list[] = new self($destination);
+          $this->list[] = new self( $destination );
           $this->total++;
         }
         return true;
@@ -168,6 +171,83 @@ class Destination extends App
          }
          $this->connection->close();
       }
+   }
+
+   /**
+    * Edit a destination
+    * @param $id Destination id
+    */
+   function edit_destination( $id = 0 )
+   {
+      // Check input
+      if ( ($_POST['name'] == '') || ($_POST['description'] == '') || ($_POST['total_quota'] == ''))
+      {
+        $this->msg_to_user = "Morate popuniti sva polja.";
+        return false;
+      }
+      else
+      {
+        $image_path = $_POST['image_path'];
+
+        // Prevent SQL Injection
+        $this->name = $this->connection->real_escape_string( $_POST['name'] );
+        $this->description = $this->connection->real_escape_string( $_POST['description'] );
+        $this->total_quota = $this->connection->real_escape_string( $_POST['total_quota'] );
+        $this->price = $this->connection->real_escape_string( $_POST['price'] );
+
+        $this->date_from = new DateTime( $_POST['date_from'] );
+        $this->date_to = new DateTime( $_POST['date_to'] );
+
+        $date_from = $this->date_from->format('Y-m-d H:i:s');
+        $date_to = $this->date_to->format('Y-m-d H:i:s');
+
+        if ( $_FILES["image"]["name"] )
+        {
+           $target_dir = "../img/destinations/";
+          $target_file = $target_dir . basename( $_FILES["image"]["name"] );
+          $upload_ok = 1;
+          $imageFileType = pathinfo( $target_file, PATHINFO_EXTENSION );
+
+          $this->image_path = basename( $_FILES["image"]["name"] );
+
+          // Check if file is image
+          $check = getimagesize( $_FILES["image"]["tmp_name"] );
+          if( $check !== false )
+          {
+            if ( !move_uploaded_file( $_FILES["image"]["tmp_name"], $target_file ) )
+            {
+              $this->msg_to_user = "Greska prilikom uploadovanja";
+              return false;
+            }
+          }
+          else
+          {
+              $this->msg_to_user = "Pogresan fajl.";
+              return false;
+          }
+        }
+
+        $this->update_in_db($date_from, $date_to);
+
+       }
+
+   }
+
+   public function update_in_db($date_from, $date_to)
+   {
+      $sql = "UPDATE destinations SET name = '$this->name', description = '$this->description', total_quota = '$this->total_quota', image_path = '$this->image_path', date_from = '$date_from', date_to = '$date_to', price = '$this->price' WHERE id = '$this->id'";
+
+     $result = $this->connection->query( $sql );
+
+     if ( $error = $this->connection->error )
+     {
+       $this->msg_to_user = "Došlo je do greske pri čuvanju. " . $error;
+       $this->connection->close();
+       return false;
+     }
+
+      $this->msg_to_user = "Uspešno ste izmenili destinaciju: " . $this->name;
+      return true;
    }
 }
 
