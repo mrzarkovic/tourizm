@@ -6,9 +6,9 @@
 class Destinations extends Core
 {
    /**
-    * Show index page fot destinations
+    * Show index page for destinations
     */
-   public function index( $page = 0 )
+   public function listing( $page = 0 )
    {
       // Limit destinations per page
       $per_page = 4;
@@ -56,7 +56,7 @@ class Destinations extends Core
    {
       if ( !user_logged_in() )
       {
-         header('Location: ../login.php');
+         header('Location: /login');
       }
       $destination = new Destination();
       $destination->get_destinations();
@@ -148,7 +148,7 @@ class Destinations extends Core
    {
       if ( !user_logged_in() )
       {
-        header('Location: ../login.php');
+        header('Location: /login');
       }
       else
       {
@@ -173,7 +173,7 @@ class Destinations extends Core
    {
       if ( !user_logged_in() )
       {
-         header('Location: ../login.php');
+         header('Location: /login');
       }
       else
       {

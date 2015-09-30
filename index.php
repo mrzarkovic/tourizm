@@ -3,8 +3,8 @@
 
    $route = new Route();
    $route->add('/', 'home@Page');
-   $route->add('/ponude', 'index@Destinations');
-   $route->add('/ponude/(:num)', 'index@Destinations');
+   $route->add('/ponude', 'listing@Destinations');
+   $route->add('/ponude/(:num)', 'listing@Destinations');
    $route->add('/kontakt', 'index@Contact');
    $route->add('/ponuda/(:num)', 'show@Destinations');
    $route->add('/rezervisi', 'index@Reservations');
