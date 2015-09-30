@@ -1,6 +1,6 @@
 <?php
 
-class Reservation extends App
+class Reservation extends Repository
 {
 
    public $list;

@@ -8,7 +8,7 @@
   <p class="notice">
     <?php echo $this->msg_to_user; ?>
   </p>
-  <form action="rezervisi.php" method="post">
+  <form action="/rezervisi" method="post">
     <input type="hidden" name="destination_id" value="<?php echo $destination->id; ?>">
     <div class="form-field">
       <label for="name">Vaše ime:</label>

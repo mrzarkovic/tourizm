@@ -19,7 +19,7 @@
           <div class="destination-price">
             <?php echo $destination->price; ?> RSD
           </div>
-          <a href="ponuda.php?id=<?php echo $destination->id; ?>" class="see-more">Pogledajte ponudu</a>
+          <a href="ponuda/<?php echo $destination->id; ?>" class="see-more">Pogledajte ponudu</a>
         </div>
         <!-- end of .destination -->
       <?php

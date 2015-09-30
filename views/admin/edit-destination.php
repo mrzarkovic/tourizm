@@ -3,16 +3,16 @@
   <h1>Izmeni destinaciju: <?php echo $destination->name; ?></h1>
   <ul class="admin-submenu clearfix">
     <li>
-      <a href="manage-destinations.php">Lista destinacija</a>
+      <a href="/admin/manage-destinations">Lista destinacija</a>
     </li>
     <li>
-      <a href="add-destination.php">Dodaj destinaciju</a>
+      <a href="/admin/add-destination">Dodaj destinaciju</a>
     </li>
   </ul>
   <p class="notice">
     <?php echo $this->msg_to_user; ?>
   </p>
-  <form action="edit-destination.php" method="post" enctype="multipart/form-data">
+  <form action="/admin/edit-destination" method="post" enctype="multipart/form-data">
      <input type="hidden" name="destination_id" value="<?php echo $destination->id; ?>">
      <input type="hidden" name="image_path" value="<?php echo $destination->image_path; ?>"/>
     <div class="form-field">
@@ -25,7 +25,7 @@
     </div>
     <div class="form-field">
       <label for="image">Fotografija:</label>
-      <div class="image-preview"><img src="../img/destinations/<?php echo $destination->image_path;?>"/></div>
+      <div class="image-preview"><img src="/img/destinations/<?php echo $destination->image_path;?>"/></div>
       <input type="file" name="image" id="image">
     </div>
     <div class="form-field">

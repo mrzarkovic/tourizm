@@ -2,7 +2,7 @@
   <h1>Sve ponude</h1>
   <div class="destinations clearfix">
      <div class="search">
-        <form action="ponude.php" method="post">
+        <form action="/ponude" method="post">
            <label for="search">Pretraga: </label>
            <input type="text" name="search" placeholder="npr. Jamajka">
            <input type="submit" name="submit" value="Traži">
@@ -17,7 +17,7 @@
       ?>
         <div class="destination">
           <div class="destination-image">
-            <img src="img/destinations/<?php echo $destination->image_path; ?>" width="200"/>
+            <img src="/img/destinations/<?php echo $destination->image_path; ?>" width="200"/>
           </div>
           <h1><?php echo $destination->name; ?></h1>
           <div class="date">
@@ -27,7 +27,7 @@
           <div class="destination-price">
             <?php echo $destination->price; ?> RSD
           </div>
-          <a href="ponuda.php?id=<?php echo $destination->id; ?>" class="see-more">Pogledajte ponudu</a>
+          <a href="/ponuda/<?php echo $destination->id; ?>" class="see-more">Pogledajte ponudu</a>
         </div>
         <!-- end of .destination -->
       <?php
@@ -51,12 +51,12 @@
      <ul class="clearfix">
         <?php if ( $page > 0 ) : ?>
         <li>
-           <a href="?page=<?php echo $page; ?>">« Prethodna</a>
+           <a href="/ponude/<?php echo $page; ?>">« Prethodna</a>
         </li>
         <?php endif; ?>
         <?php if ( $page + 1 < $max_page ) : ?>
         <li>
-           <a href="?page=<?php echo $page + 2; ?>">Sledeća »</a>
+           <a href="/ponude/<?php echo $page + 2; ?>">Sledeća »</a>
         </li>
         <?php endif; ?>
      </ul>

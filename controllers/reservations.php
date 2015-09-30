@@ -5,15 +5,10 @@
  */
 class Reservations extends Core
 {
-   public function index()
+   public function index( $destination_id = 0 )
    {
-      $destination_id = 0;
 
-      if ( !empty( $_GET ) && isset( $_GET['id'] ) )
-      {
-        $destination_id = $_GET['id'];
-      }
-      else if (!empty( $_POST ) && isset( $_POST['destination_id'] ) )
+      if (!empty( $_POST ) && isset( $_POST['destination_id'] ) )
       {
         $destination_id = $_POST['destination_id'];
         if ( $this->_make_reservation( $destination_id ) )
@@ -74,7 +69,7 @@ class Reservations extends Core
    {
       if ( !user_logged_in() )
       {
-         header('Location: ../login.php');
+         header('Location: /login.php');
       }
       else
       {
@@ -82,22 +77,21 @@ class Reservations extends Core
          $reservation = new Reservation();
          $reservation->get_reservations();
 
-         include('../views/admin/manage-reservations.php');
+         include('/views/admin/manage-reservations.php');
       }
    }
 
-   public function delete()
+   public function delete( $id = 0 )
    {
 
       if ( !user_logged_in() )
       {
-         header('Location: ../login.php');
+         header('Location: /login.php');
       }
       else
       {
-         if ( !empty( $_GET ) && isset( $_GET['id'] ) )
+         if ( $id != 0 )
          {
-            $id = $_GET['id'];
             $reservation = new Reservation();
             if ( $reservation->delete_reservation( $id ) )
             {
@@ -112,7 +106,7 @@ class Reservations extends Core
          {
             $this->msg_to_user = "Rezervacija ne postoji.";
          }
-         include('../views/admin/delete-reservation.php');
+         include('/views/admin/delete-reservation.php');
       }
    }
 }

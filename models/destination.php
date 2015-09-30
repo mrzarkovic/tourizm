@@ -1,6 +1,6 @@
 <?php
 
-class Destination extends App
+class Destination extends Repository
 {
 
    public $list;

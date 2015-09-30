@@ -14,7 +14,7 @@
       <li>
         <b><?php echo $destination->name; ?></b><br>Ime: <?php echo $reservation->customer_name; ?> | Tel: <?php echo $reservation->customer_phone; ?> |  Email: <a href="mailto:<?php echo $reservation->customer_email; ?>"><?php echo $reservation->customer_email; ?></a>
         <div class="control">
-           <a data-role="del" href="delete-reservation.php?id=<?php echo $reservation->id; ?>">obriši</a>
+           <a data-role="del" href="/admin/delete-reservation/<?php echo $reservation->id; ?>">obriši</a>
         </div>
       </li>
     <?php

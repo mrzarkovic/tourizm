@@ -3,7 +3,7 @@
   <p class="notice">
     <?php echo $this->msg_to_user; ?>
   </p>
-  <form action="login.php" method="post">
+  <form action="/login" method="post">
     <div class="form-field">
       <label for="username">Korisničko ime</label>
       <input type="text" name="username" id="username" />

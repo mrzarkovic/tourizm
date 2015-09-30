@@ -1,14 +1,19 @@
 <?php
 
 session_start();
-include($_SERVER['DOCUMENT_ROOT'].'tourizm/includes/app.class.php');
-$app = new App();
-include($_SERVER['DOCUMENT_ROOT'].'tourizm/models/destination.php');
-include($_SERVER['DOCUMENT_ROOT'].'tourizm/models/reservation.php');
-include($_SERVER['DOCUMENT_ROOT'].'tourizm/controllers/core.php');
-$core = new Core();
-include($_SERVER['DOCUMENT_ROOT'].'tourizm/controllers/page.php');
-include($_SERVER['DOCUMENT_ROOT'].'tourizm/controllers/destinations.php');
-include($_SERVER['DOCUMENT_ROOT'].'tourizm/controllers/reservations.php');
-include($_SERVER['DOCUMENT_ROOT'].'tourizm/controllers/contact.php');
-include($_SERVER['DOCUMENT_ROOT'].'tourizm/includes/helpers.php');
+// Models
+require_once(dirname(dirname(__FILE__)) . '/models/repository.php');
+require_once(dirname(dirname(__FILE__)) . '/models/destination.php');
+require_once(dirname(dirname(__FILE__)) . '/models/reservation.php');
+require_once(dirname(dirname(__FILE__)) . '/models/user.php');
+// Controllers
+require_once(dirname(dirname(__FILE__)) . '/controllers/core.php');
+require_once(dirname(dirname(__FILE__)) . '/controllers/page.php');
+require_once(dirname(dirname(__FILE__)) . '/controllers/destinations.php');
+require_once(dirname(dirname(__FILE__)) . '/controllers/reservations.php');
+require_once(dirname(dirname(__FILE__)) . '/controllers/contact.php');
+require_once(dirname(dirname(__FILE__)) . '/controllers/logger.php');
+// Helpers
+require_once(dirname(dirname(__FILE__)) . '/includes/helpers.php');
+// Engines
+require_once(dirname(dirname(__FILE__)) . '/includes/route.php');

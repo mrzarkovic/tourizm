@@ -1,6 +1,6 @@
 <header class="header">
   <div class="content clearfix">
-    <a href="/tourizm/index.php">
+    <a href="/">
       <div class="logo">
         Tourizm Logo
       </div>
@@ -13,20 +13,20 @@
     <div class="content">
       <ul class="clearfix">
         <li>
-          <a href="/tourizm/index.php">Početna</a>
+          <a href="/">Početna</a>
         </li>
         <li>
-          <a href="/tourizm/ponude.php">Sve ponude</a>
+          <a href="/ponude">Sve ponude</a>
         </li>
         <li>
-          <a href="/tourizm/kontakt.php">Kontakt</a>
+          <a href="/kontakt">Kontakt</a>
         </li>
         <?php
-          if (!$app->user_logged_in())
+          if (!user_logged_in())
           {
         ?>
         <li class="admin-login">
-          <a href="/tourizm/login.php">Administracija</a>
+          <a href="/login">Administracija</a>
         </li>
         <?php
           }
@@ -34,13 +34,13 @@
           {
         ?>
         <li class="admin-login">
-          <a href="/tourizm/admin/logout.php">Odjavi se</a>
+          <a href="/admin/logout">Odjavi se</a>
         </li>
         <li class="admin-login">
-          <a href="/tourizm/admin/manage-destinations.php">Destinacije</a>
+          <a href="/admin/manage-destinations">Destinacije</a>
         </li>
         <li class="admin-login">
-          <a href="/tourizm/admin/manage-reservations.php">Rezervacije</a>
+          <a href="/admin/manage-reservations">Rezervacije</a>
         </li>
         <?php
           }

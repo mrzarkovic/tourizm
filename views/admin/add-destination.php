@@ -2,13 +2,13 @@
    <h1>Dodaj novu destinaciju</h1>
    <ul class="admin-submenu clearfix">
       <li>
-         <a href="manage-destinations.php">Lista destinacija</a>
+         <a href="/admin/manage-destinations">Lista destinacija</a>
       </li>
    </ul>
    <p class="notice">
       <?php echo $this->msg_to_user; ?>
    </p>
-   <form action="add-destination.php" method="post" enctype="multipart/form-data">
+   <form action="/admin/add-destination" method="post" enctype="multipart/form-data">
       <div class="form-field">
          <label for="name">Naslov:</label>
          <input type="text" name="name" id="name" />

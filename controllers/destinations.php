@@ -8,15 +8,15 @@ class Destinations extends Core
    /**
     * Show index page fot destinations
     */
-   public function index()
+   public function index( $page = 0 )
    {
       // Limit destinations per page
       $per_page = 4;
 
-      if ( !empty( $_GET['page'] ) )
+      if ( !empty( $page ) )
       {
          // Get the current page
-         $page = (int) $_GET['page'] - 1;
+         $page = (int) $page - 1;
       }
       else
       {
@@ -44,9 +44,8 @@ class Destinations extends Core
 
    public function show( $id = 0 )
    {
-      if (!empty($_GET) && isset($_GET['id']))
+      if (!empty($id) && isset($id))
       {
-         $id = $_GET['id'];
          $destination = new Destination();
          $destination->get_destination( $id );
       }
@@ -62,23 +61,20 @@ class Destinations extends Core
       $destination = new Destination();
       $destination->get_destinations();
 
-      include('../views/admin/destinations.php');
+      include('/views/admin/manage-destinations.php');
    }
 
-   public function edit()
+   public function edit( $id = 0 )
    {
-
       if ( !user_logged_in() )
       {
-         header('Location: ../login.php');
+         header('Location: /login');
       }
       else
       {
-         $id = 0;
          $destination = new Destination();
-         if ( !empty( $_GET ) && isset( $_GET['id'] ) )
+         if ( !empty( $id ) && isset( $id ) )
          {
-            $id = $_GET['id'];
             $destination->get_destination( $id );
          }
 
@@ -99,7 +95,7 @@ class Destinations extends Core
             }
          }
 
-         include('../views/admin/edit-destination.php');
+         include('/views/admin/edit-destination.php');
       }
    }
 
@@ -121,7 +117,7 @@ class Destinations extends Core
 
         if ( $_FILES["image"]["name"] )
         {
-            $target_dir = "../img/destinations/";
+            $target_dir = "img/destinations/";
             $target_file = $target_dir . basename( $_FILES["image"]["name"] );
             $upload_ok = 1;
             $imageFileType = pathinfo( $target_file, PATHINFO_EXTENSION );
@@ -148,18 +144,16 @@ class Destinations extends Core
       return $image_path;
    }
 
-   public function delete()
+   public function delete( $id = 0 )
    {
-
       if ( !user_logged_in() )
       {
         header('Location: ../login.php');
       }
       else
       {
-        if ( !empty( $_GET ) && isset( $_GET['id'] ) )
+        if ( $id )
         {
-            $id = $_GET['id'];
             $destination = new Destination();
             if ( $destination->delete_destination( $id ) )
             {
@@ -171,7 +165,7 @@ class Destinations extends Core
             }
         }
 
-        include('../views/admin/delete-destination.php');
+        include('/views/admin/delete-destination.php');
       }
    }
 
@@ -199,7 +193,7 @@ class Destinations extends Core
             }
          }
 
-         include('../views/admin/add-destination.php');
+         include('/views/admin/add-destination.php');
       }
    }
 
@@ -213,7 +207,7 @@ class Destinations extends Core
       }
       else
       {
-         $target_dir = "../img/destinations/";
+         $target_dir = "img/destinations/";
          $target_file = $target_dir . basename( $_FILES["image"]["name"] );
          $upload_ok = 1;
          $imageFileType = pathinfo( $target_file, PATHINFO_EXTENSION );
