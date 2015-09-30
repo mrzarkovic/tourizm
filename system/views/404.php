@@ -2,4 +2,4 @@
   <h1>Stranica nije pronadjena.</h1>
   <p><?php echo $msg; ?></p>
 </section>
-<?php include_once('includes/footer.php'); ?>
+<?php include(BASEPATH . '/views/partials/footer.php'); ?>

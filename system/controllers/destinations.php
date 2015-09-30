@@ -1,4 +1,4 @@
-<?php
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 /**
  * Destinations controller
@@ -39,7 +39,7 @@ class Destinations extends Core
           $destination->find_destinations( $keyword );
       }
 
-      include('views/destinations.php');
+      include(BASEPATH .' /views/destinations.php');
    }
 
    public function show( $id = 0 )
@@ -49,7 +49,7 @@ class Destinations extends Core
          $destination = new Destination();
          $destination->get_destination( $id );
       }
-      include('views/destination.php');
+      include(BASEPATH .' /views/destination.php');
    }
 
    public function manage()
@@ -61,7 +61,7 @@ class Destinations extends Core
       $destination = new Destination();
       $destination->get_destinations();
 
-      include('/views/admin/manage-destinations.php');
+      include(BASEPATH .' /views/admin/manage-destinations.php');
    }
 
    public function edit( $id = 0 )
@@ -95,7 +95,7 @@ class Destinations extends Core
             }
          }
 
-         include('/views/admin/edit-destination.php');
+         include(BASEPATH .' /views/admin/edit-destination.php');
       }
    }
 
@@ -165,7 +165,7 @@ class Destinations extends Core
             }
         }
 
-        include('/views/admin/delete-destination.php');
+        include(BASEPATH .' /views/admin/delete-destination.php');
       }
    }
 
@@ -193,7 +193,7 @@ class Destinations extends Core
             }
          }
 
-         include('/views/admin/add-destination.php');
+         include(BASEPATH .' /views/admin/add-destination.php');
       }
    }
 

@@ -1,4 +1,4 @@
-<?php
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 /**
  * Contact controller
@@ -11,7 +11,7 @@ class Contact extends Core
       {
          $this->_send_contact_message();
       }
-      include('views/contact.php');
+      include(BASEPATH .' /views/contact.php');
    }
 
    /**

@@ -1,4 +1,4 @@
-<?php
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 /**
  * Page controller
@@ -10,7 +10,7 @@ class Page extends Core
       $destination = new Destination();
       $destination->get_destinations( $limit = 4 );
 
-      include('views/home.php');
+      include(BASEPATH .' /views/home.php');
    }
 
 }

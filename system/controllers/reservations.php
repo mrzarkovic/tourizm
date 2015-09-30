@@ -1,4 +1,4 @@
-<?php
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 /**
  * Reservations controller
@@ -30,7 +30,7 @@ class Reservations extends Core
       $destination = new Destination();
       $destination->get_destination( $destination_id );
 
-      include('views/reservation.php');
+      include(BASEPATH .' /views/reservation.php');
    }
 
    private function _make_reservation( $destination_id = 0 )
@@ -77,7 +77,7 @@ class Reservations extends Core
          $reservation = new Reservation();
          $reservation->get_reservations();
 
-         include('/views/admin/manage-reservations.php');
+         include(BASEPATH .' /views/admin/manage-reservations.php');
       }
    }
 
@@ -106,7 +106,7 @@ class Reservations extends Core
          {
             $this->msg_to_user = "Rezervacija ne postoji.";
          }
-         include('/views/admin/delete-reservation.php');
+         include(BASEPATH .' /views/admin/delete-reservation.php');
       }
    }
 }

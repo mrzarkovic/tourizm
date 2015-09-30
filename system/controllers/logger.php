@@ -1,4 +1,4 @@
-<?php
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Logger extends Core
 {
@@ -8,7 +8,7 @@ class Logger extends Core
       {
          $this->_login_user();
       }
-      include('views/login.php');
+      include(BASEPATH .' /views/login.php');
    }
 
    private function _login_user()
