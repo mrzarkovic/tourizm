@@ -75,7 +75,3 @@ function user_logged_in()
 
   return false;
 }
-
-
-
-?>

@@ -1,4 +1,4 @@
-<?php
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Destination extends Repository
 {
@@ -112,6 +112,7 @@ class Destination extends Repository
 
    /**
     * Add a new destination to the database
+    * @param $image_path Path to the featured image
     */
    public function add_destination_to_db( $image_path )
    {
@@ -207,5 +208,3 @@ class Destination extends Repository
       return (int) $total_quota - (int) $total_reservations;
    }
 }
-
-?>
