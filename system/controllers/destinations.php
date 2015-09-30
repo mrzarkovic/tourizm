@@ -82,7 +82,7 @@ class Destinations extends Core
          {
             $id = $_POST['destination_id'];
             $destination->get_destination( $id );
-            if ( $image_path = $this->_edit_destination( $id ) )
+            if ( $image_path = $this->_check_input_before_update( $id ) )
             {
                if ( $destination->update_destination_in_db( $image_path ) )
                {
@@ -90,7 +90,7 @@ class Destinations extends Core
                }
                else
                {
-                  $this->msg_to_user = "Došlo je do greske pri čuvanju.";
+                  $this->msg_to_user = "Došlo je do greske prilikom čuvanja.";
                }
             }
          }
@@ -100,10 +100,11 @@ class Destinations extends Core
    }
 
    /**
-    * Edit a destination
+    * Check the input data brefore updating an entry
     * @param $id Destination id
+    * @return string $image_path
     */
-   private function _edit_destination( $id = 0 )
+   private function _check_input_before_update( $id )
    {
       // Check input
       if ( ($_POST['name'] == '') || ($_POST['description'] == '') || ($_POST['total_quota'] == ''))
@@ -113,36 +114,30 @@ class Destinations extends Core
       }
       else
       {
-        $image_path = $_POST['image_path'];
-
-        if ( $_FILES["image"]["name"] )
-        {
-            $target_dir = "img/destinations/";
-            $target_file = $target_dir . basename( $_FILES["image"]["name"] );
-            $upload_ok = 1;
-            $imageFileType = pathinfo( $target_file, PATHINFO_EXTENSION );
-
-            $image_path = basename( $_FILES["image"]["name"] );
-
-            // Check if file is image
-            $check = getimagesize( $_FILES["image"]["tmp_name"] );
-            if( $check !== false )
+         if ( $_FILES["image"]["name"] )
+         {
+            if ( $image_path = $this->_upload_image() )
             {
-               if ( !move_uploaded_file( $_FILES["image"]["tmp_name"], $target_file ) )
-               {
-                 $this->msg_to_user = "Greska prilikom uploadovanja";
-                 return false;
-               }
+               $destination = new Destination();
+               $destination->get_destination( $id );
+               // Delete the previous image if it's not the same
+               if ( $_FILES["image"]["name"] != $destination->image_path )
+                  unlink( '../public/img/destinations/' . $destination->image_path );
             }
             else
             {
-              $this->msg_to_user = "Pogresan fajl.";
-              return false;
+               return false;
             }
+         }
+         else
+         {
+            $image_path = $_POST['image_path'];
          }
       }
       return $image_path;
    }
+
+
 
    public function delete( $id = 0 )
    {
@@ -180,7 +175,7 @@ class Destinations extends Core
          if ( !empty( $_POST ) )
          {
             $destination = new Destination();
-            if ( $image_path = $this->_add_destination() )
+            if ( $image_path = $this->_check_input_before_add() )
             {
                if ( $destination->add_destination_to_db( $image_path ) )
                {
@@ -191,13 +186,17 @@ class Destinations extends Core
                   $this->msg_to_user = "Došlo je do greske pri čuvanju.";
                }
             }
+            else
+            {
+               $this->msg_to_user = "Error.";
+            }
          }
 
          include(BASEPATH .' /views/admin/add-destination.php');
       }
    }
 
-   private function _add_destination()
+   private function _check_input_before_add()
    {
       // Check input
       if ( ($_POST['name'] == '') || ($_POST['description'] == '') || ($_POST['total_quota'] == ''))
@@ -207,37 +206,43 @@ class Destinations extends Core
       }
       else
       {
-         $target_dir = "img/destinations/";
-         $target_file = $target_dir . basename( $_FILES["image"]["name"] );
-         $upload_ok = 1;
-         $imageFileType = pathinfo( $target_file, PATHINFO_EXTENSION );
-
-         $image_path = basename( $_FILES["image"]["name"] );
-
-         // Check if file is image
-         if ( !empty( $_FILES["image"]["tmp_name"] ) )
+         if (!empty($_FILES["image"]["name"]))
          {
-            $check = getimagesize( $_FILES["image"]["tmp_name"] );
+            $image_path = $this->_upload_image();
          }
          else
          {
-            $check = false;
+            $image_path = "default.jpg";
          }
-         if( $check !== false )
-         {
-            if ( !move_uploaded_file( $_FILES["image"]["tmp_name"], $target_file ) )
-            {
-               $this->msg_to_user = "Greska prilikom uploadovanja";
-               return false;
-            }
-         }
-         else
-         {
-            $this->msg_to_user = "Pogresan fajl.";
-            return false;
-         }
-
          return $image_path;
       }
+   }
+
+   private function _upload_image()
+   {
+      $target_dir = "img/destinations/";
+      $target_file = $target_dir . basename( $_FILES["image"]["name"] );
+      $upload_ok = 1;
+      $imageFileType = pathinfo( $target_file, PATHINFO_EXTENSION );
+
+      $image_path = basename( $_FILES["image"]["name"] );
+
+      // Check if file is image
+      $check = getimagesize( $_FILES["image"]["tmp_name"] );
+      if( $check !== false )
+      {
+         if ( !move_uploaded_file( $_FILES["image"]["tmp_name"], $target_file ) )
+         {
+           $this->msg_to_user = "Greska prilikom uploadovanja";
+           return false;
+         }
+      }
+      else
+      {
+        $this->msg_to_user = "Pogresan fajl.";
+        return false;
+      }
+
+      return $image_path;
    }
 }
