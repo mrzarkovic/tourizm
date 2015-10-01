@@ -30,7 +30,7 @@
     </div>
     <div class="form-field">
       <label for="total_quota">Ukupno aranžmana:</label>
-      <input type="text" name="total_quota" id="total_quota" value="<?php echo $destination->total_quota; ?>"/>
+      <input type="number" name="total_quota" id="total_quota" value="<?php echo $destination->total_quota; ?>"/>
     </div>
     <div class="form-field">
       <label for="date_from">Datum od:</label>
@@ -42,7 +42,7 @@
     </div>
     <div class="form-field">
       <label for="price">Cena:</label>
-      <input type="text" name="price" id="price" value="<?php echo $destination->price; ?>"> RSD
+      <input type="number" name="price" id="price" value="<?php echo $destination->price; ?>"> RSD
     </div>
     <div class="form-field">
       <input type="submit" name="submit" value="Sačuvaj izmene" />

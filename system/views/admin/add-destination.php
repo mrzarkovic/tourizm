@@ -23,7 +23,7 @@
       </div>
       <div class="form-field">
          <label for="total_quota">Ukupno aranžmana:</label>
-         <input type="text" name="total_quota" id="total_quota" />
+         <input type="number" name="total_quota" id="total_quota" />
       </div>
       <div class="form-field">
          <label for="date_from">Datum od:</label>
@@ -35,7 +35,7 @@
       </div>
       <div class="form-field">
          <label for="price">Cena:</label>
-         <input type="text" name="price" id="price"> RSD
+         <input type="number" name="price" id="price"> RSD
       </div>
       <div class="form-field">
          <input type="submit" name="submit" value="Dodaj destinaciju" />

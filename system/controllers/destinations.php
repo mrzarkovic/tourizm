@@ -73,6 +73,7 @@ class Destinations extends Core
       else
       {
          $destination = new Destination();
+
          if ( !empty( $id ) && isset( $id ) )
          {
             $destination->get_destination( $id );
@@ -106,6 +107,7 @@ class Destinations extends Core
     */
    private function _check_input_before_update( $id )
    {
+
       // Check input
       if ( ($_POST['name'] == '') || ($_POST['description'] == '') || ($_POST['total_quota'] == ''))
       {
@@ -120,9 +122,8 @@ class Destinations extends Core
             {
                $destination = new Destination();
                $destination->get_destination( $id );
-               // Delete the previous image if it's not the same
-               if ( $_FILES["image"]["name"] != $destination->image_path )
-                  unlink( '../public/img/destinations/' . $destination->image_path );
+               // Delete the previous image
+               $this->_delete_image($destination->image_path);
             }
             else
             {
@@ -137,8 +138,27 @@ class Destinations extends Core
       return $image_path;
    }
 
+   /**
+    * Unlink an image from the destinations images directory
+    * @param  string $name File name
+    * @return bool
+    */
+   private function _delete_image( $name )
+   {
+      // Don't delete the default image
+      if ( $name == "default.jpg" )
+         return true;
 
+      if ( unlink( '../public/img/destinations/' . $name ) )
+         return true;
 
+      return false;
+   }
+
+   /**
+    * Show a delete page
+    * @param  integer $id Destination id
+    */
    public function delete( $id = 0 )
    {
       if ( !user_logged_in() )
@@ -150,9 +170,14 @@ class Destinations extends Core
         if ( $id )
         {
             $destination = new Destination();
+            $destination->get_destination($id);
+            $image_path = $destination->image_path;
             if ( $destination->delete_destination( $id ) )
             {
-               $this->msg_to_user = "Uspešno ste obrisali destinaciju.";
+               if ( $this->_delete_image($image_path) )
+                  $this->msg_to_user = "Uspešno ste obrisali destinaciju.";
+               else
+                  $this->msg_to_user = "Greška prilikom brisanja slike.";
             }
             else
             {
@@ -164,6 +189,9 @@ class Destinations extends Core
       }
    }
 
+   /**
+    * Show an empty form for adding new Destinations
+    */
    public function add()
    {
       if ( !user_logged_in() )
@@ -185,10 +213,6 @@ class Destinations extends Core
                {
                   $this->msg_to_user = "Došlo je do greske pri čuvanju.";
                }
-            }
-            else
-            {
-               $this->msg_to_user = "Error.";
             }
          }
 
@@ -221,11 +245,9 @@ class Destinations extends Core
    private function _upload_image()
    {
       $target_dir = "img/destinations/";
-      $target_file = $target_dir . basename( $_FILES["image"]["name"] );
-      $upload_ok = 1;
-      $imageFileType = pathinfo( $target_file, PATHINFO_EXTENSION );
-
-      $image_path = basename( $_FILES["image"]["name"] );
+      $extension = pathinfo( basename($_FILES["image"]["name"]), PATHINFO_EXTENSION );
+      $filename = microtime() . "." . $extension;
+      $target_file = $target_dir . $filename;
 
       // Check if file is image
       $check = getimagesize( $_FILES["image"]["tmp_name"] );
@@ -243,6 +265,6 @@ class Destinations extends Core
         return false;
       }
 
-      return $image_path;
+      return $filename;
    }
 }
