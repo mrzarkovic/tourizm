@@ -8,7 +8,7 @@ class Logger extends Core
       {
          $this->_login_user();
       }
-      include(BASEPATH .' /views/login.php');
+      $this->load_template("login");
    }
 
    private function _login_user()

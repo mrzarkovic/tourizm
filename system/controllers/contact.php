@@ -11,7 +11,7 @@ class Contact extends Core
       {
          $this->_send_contact_message();
       }
-      include(BASEPATH .' /views/contact.php');
+      $this->load_template("contact");
    }
 
    /**

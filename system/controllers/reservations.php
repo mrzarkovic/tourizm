@@ -30,7 +30,8 @@ class Reservations extends Core
       $destination = new Destination();
       $destination->get_destination( $destination_id );
 
-      include(BASEPATH .' /views/reservation.php');
+      $this->to_tpl['destination'] = $destination;
+      $this->load_template("reservation");
    }
 
    private function _make_reservation( $destination_id = 0 )
@@ -65,48 +66,4 @@ class Reservations extends Core
       return true;
    }
 
-   public function manage()
-   {
-      if ( !user_logged_in() )
-      {
-         header('Location: /login.php');
-      }
-      else
-      {
-         $destination = new Destination();
-         $reservation = new Reservation();
-         $reservation->get_reservations();
-
-         include(BASEPATH .' /views/admin/manage-reservations.php');
-      }
-   }
-
-   public function delete( $id = 0 )
-   {
-
-      if ( !user_logged_in() )
-      {
-         header('Location: /login.php');
-      }
-      else
-      {
-         if ( $id != 0 )
-         {
-            $reservation = new Reservation();
-            if ( $reservation->delete_reservation( $id ) )
-            {
-               $this->msg_to_user = "Uspešno ste obrisali rezervaciju.";
-            }
-            else
-            {
-               $this->msg_to_user = "Došlo je do greske prilikom brisanja.";
-            }
-         }
-         else
-         {
-            $this->msg_to_user = "Rezervacija ne postoji.";
-         }
-         include(BASEPATH .' /views/admin/delete-reservation.php');
-      }
-   }
 }

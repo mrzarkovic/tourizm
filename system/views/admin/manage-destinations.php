@@ -7,9 +7,9 @@
   </ul>
   <div class="admin-destinations">
     <?php
-    if ( $destination->list )
+    if ( $destinations->list )
     {
-     foreach ( $destination->list as $destination )
+     foreach ( $destinations->list as $destination )
      { ?>
       <div class="destination clearfix">
         <h1><?php echo $destination->name; ?> <small>još <span class="bold"><?php echo $destination->get_reservatons_left(); ?></span> aranžmana (<time><?php echo $destination->date_from->format('d.m.Y.'); ?></time> - <time><?php echo $destination->date_to->format('d.m.Y.'); ?></time>)</small></h1>

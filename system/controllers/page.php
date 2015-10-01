@@ -10,7 +10,9 @@ class Page extends Core
       $destination = new Destination();
       $destination->get_destinations( $limit = 4 );
 
-      include(BASEPATH .' /views/home.php');
+      $this->to_tpl['destination'] = $destination;
+
+      $this->load_template("home");
    }
 
 }

@@ -9,10 +9,10 @@
         </form>
      </div>
     <?php
-    if ( $destination->list )
+    if ( $destinations->list )
     {
       $i = 0;
-     foreach ( $destination->list as $destination )
+     foreach ( $destinations->list as $destination )
      {
       ?>
         <div class="destination">

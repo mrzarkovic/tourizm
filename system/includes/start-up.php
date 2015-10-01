@@ -10,7 +10,9 @@ require_once(dirname(dirname(__FILE__)) . '/models/user.php');
 require_once(dirname(dirname(__FILE__)) . '/controllers/core.php');
 require_once(dirname(dirname(__FILE__)) . '/controllers/page.php');
 require_once(dirname(dirname(__FILE__)) . '/controllers/destinations.php');
+require_once(dirname(dirname(__FILE__)) . '/controllers/admin_destinations.php');
 require_once(dirname(dirname(__FILE__)) . '/controllers/reservations.php');
+require_once(dirname(dirname(__FILE__)) . '/controllers/admin_reservations.php');
 require_once(dirname(dirname(__FILE__)) . '/controllers/contact.php');
 require_once(dirname(dirname(__FILE__)) . '/controllers/logger.php');
 // Helpers
