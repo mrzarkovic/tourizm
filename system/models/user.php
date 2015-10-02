@@ -1,4 +1,8 @@
-<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php
+
+namespace Tourizm\Model;
+
+if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class User extends Repository
 {

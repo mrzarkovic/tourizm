@@ -1,10 +1,21 @@
-<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php
+
+namespace Tourizm\Controller;
+
+use \Tourizm\Model\Destination;
+
+if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 /**
  * Destinations controller
  */
 class Destinations extends Core
 {
+   public function __construct()
+   {
+      parent::__construct();
+      $this->page_name = "Destinacije";
+   }
    /**
     * Show index page for destinations
     */
@@ -42,8 +53,9 @@ class Destinations extends Core
       $this->to_tpl['max_page'] = $max_page;
       $this->to_tpl['page'] = $page;
       $this->to_tpl['destinations'] = $destinations;
+      $this->template = "destinations";
+      $this->page_name = "Lista destinacija";
 
-      $this->load_template("destinations");
    }
 
    /**
@@ -59,8 +71,7 @@ class Destinations extends Core
       }
 
       $this->to_tpl['destination'] = $destination;
-      $this->load_template("destination");
+      $this->page_name = $destination->name;
+      $this->template = "destination";
    }
-
-
 }

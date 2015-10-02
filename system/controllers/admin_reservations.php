@@ -1,10 +1,22 @@
-<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php
+
+namespace Tourizm\Controller;
+
+use \Tourizm\Model\Reservation;
+use \Tourizm\Model\Destination;
+
+if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 /**
  * Admin_reservations controller
  */
 class Admin_reservations extends Core
 {
+   public function __construct()
+   {
+      parent::__construct();
+      $this->page_name = "Admin - Rezervacije";
+   }
    public function manage()
    {
       if ( !user_logged_in() )
@@ -19,7 +31,8 @@ class Admin_reservations extends Core
 
          $this->to_tpl['reservation'] = $reservation;
          $this->to_tpl['destination'] = $destination;
-         $this->load_template("admin/manage-reservations");
+         $this->page_name = "Pregled rezervacija";
+         $this->template = "admin/manage-reservations";
       }
    }
 
@@ -49,7 +62,8 @@ class Admin_reservations extends Core
             $this->msg_to_user = "Rezervacija ne postoji.";
          }
 
-         $this->load_template("admin/delete-reservation");
+         $this->page_name = "Brisanje rezervacije";
+         $this->template = "admin/delete-reservation";
       }
    }
 

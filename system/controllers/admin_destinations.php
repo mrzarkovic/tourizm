@@ -1,10 +1,21 @@
-<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php
+
+namespace Tourizm\Controller;
+
+use \Tourizm\Model\Destination;
+
+if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 /**
  * Admin destinations controller
  */
 class Admin_destinations extends Core
 {
+   public function __construct()
+   {
+      parent::__construct();
+      $this->page_name = "Admin - Destinacije";
+   }
    /**
     * Show the page for managing the destinations
     */
@@ -17,8 +28,9 @@ class Admin_destinations extends Core
       $destinations = new Destination();
       $destinations->get_destinations();
 
+      $this->page_name = "Pregled destinacija";
       $this->to_tpl['destinations'] = $destinations;
-      $this->load_template("admin/manage-destinations");
+      $this->template = "admin/manage-destinations";
    }
 
    /**
@@ -57,8 +69,9 @@ class Admin_destinations extends Core
             }
          }
 
+         $this->page_name = "Izmena destinacije: " . $destination->name;
          $this->to_tpl['destination'] = $destination;
-         $this->load_template("/admin/edit-destination");
+         $this->template = "/admin/edit-destination";
       }
    }
 
@@ -130,7 +143,8 @@ class Admin_destinations extends Core
             }
         }
 
-        $this->load_template("/admin/delete-destination");
+        $this->page_name = "Brisanje destinacije: " . $destination->name;
+        $this->template = "/admin/delete-destination";
       }
    }
 
@@ -161,7 +175,8 @@ class Admin_destinations extends Core
             }
          }
 
-         $this->load_template("admin/add-destination");
+         $this->page_name = "Dodavanje nove destinacije";
+         $this->template = "/admin/add-destination";
       }
    }
 

@@ -19,6 +19,10 @@ class Route
    */
   private $_function  = array();
 
+  public $class;
+  public $method;
+  public $arguments;
+
   /**
   * Builds a collection of internal URL's to look for
   * @param string $uri
@@ -37,7 +41,7 @@ class Route
   /**
    * Makes the thing run
    */
-  public function run()
+  public function resolve()
   {
     //$uri = isset($_REQUEST['uri']) ? '/' .$_REQUEST['uri'] : '/';
     $uri = isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : '/';
@@ -76,12 +80,19 @@ class Route
             $class = $args[1];
             $func = $args[0];
           }
+
+          // Add a namespace to the class name
+          $class = "\\Tourizm\\Controller\\" . $class;
+
           if (!class_exists($class))
             throw new Exception( 'Invalid route: Class "'.$class.'" does not exist.' );
 
-          $call = new $class();
-          return $call->$func( $function_arguments );
-
+          //$call = new $class();
+          $this->class = $class;
+          $this->method = $func;
+          $this->arguments = $function_arguments;
+          return;
+          //return $call->$func( $function_arguments );
         }
         /* else, presume it is an anonymous function */
         else
@@ -90,7 +101,12 @@ class Route
         }
       }
     }
-    throw new Exception( 'Error 404: Page not found.' );
+
+    $call = new \Tourizm\Controller\Error_404();
+    $this->class = $call;
+    $this->method = "index";
+    return;
+    //throw new Exception( 'Error 404: Page not found.' );
   }
 
   /**

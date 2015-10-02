@@ -1,17 +1,27 @@
-<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php
+
+namespace Tourizm\Controller;
+
+if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 /**
  * Contact controller
  */
 class Contact extends Core
 {
+   public function __construct()
+   {
+      parent::__construct();
+      $this->page_name = "Kontakt";
+   }
+
    public function index()
    {
       if ( ( !empty( $_POST ) ) && ( isset( $_POST['submit'] ) ) )
       {
          $this->_send_contact_message();
       }
-      $this->load_template("contact");
+      $this->template = "contact";
    }
 
    /**

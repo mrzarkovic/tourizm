@@ -15,7 +15,11 @@ require_once(dirname(dirname(__FILE__)) . '/controllers/reservations.php');
 require_once(dirname(dirname(__FILE__)) . '/controllers/admin_reservations.php');
 require_once(dirname(dirname(__FILE__)) . '/controllers/contact.php');
 require_once(dirname(dirname(__FILE__)) . '/controllers/logger.php');
+require_once(dirname(dirname(__FILE__)) . '/controllers/error_404.php');
 // Helpers
 require_once(dirname(dirname(__FILE__)) . '/includes/helpers.php');
 // Engines
 require_once(dirname(dirname(__FILE__)) . '/includes/route.php');
+
+// Initialize the Core controller
+$core = new \Tourizm\Controller\Core();

@@ -1,10 +1,23 @@
-<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php
+
+namespace Tourizm\Controller;
+
+use \Tourizm\Model\Reservation;
+use \Tourizm\Model\Destination;
+
+if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 /**
  * Reservations controller
  */
 class Reservations extends Core
 {
+   public function __construct()
+   {
+      parent::__construct();
+      $this->title = "Rezervacije";
+   }
+
    public function index( $destination_id = 0 )
    {
 
@@ -31,7 +44,7 @@ class Reservations extends Core
       $destination->get_destination( $destination_id );
 
       $this->to_tpl['destination'] = $destination;
-      $this->load_template("reservation");
+      $this->template = "reservation";
    }
 
    private function _make_reservation( $destination_id = 0 )

@@ -1,14 +1,26 @@
-<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php
+
+namespace Tourizm\Controller;
+
+use \Tourizm\Model\User;
+
+if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Logger extends Core
 {
+   public function __construct()
+   {
+      parent::__construct();
+      $this->page_name = "Login";
+   }
+
    public function login()
    {
       if ( !empty( $_POST ) )
       {
          $this->_login_user();
       }
-      $this->load_template("login");
+      $this->template = "login";
    }
 
    private function _login_user()

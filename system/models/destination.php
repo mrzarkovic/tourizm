@@ -1,4 +1,10 @@
-<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php
+
+namespace Tourizm\Model;
+
+use \DateTime;
+
+if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Destination extends Repository
 {
